@@ -449,6 +449,158 @@
             font-weight: 600;
         }
 
+        /* Chairman Section */
+        .chairman-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .chairman-profile {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            align-items: center;
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .chairman-image {
+            position: relative;
+        }
+
+        .chairman-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .chairman-badge {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(230,0,18,0.3);
+            white-space: nowrap;
+        }
+
+        .chairman-badge i {
+            color: var(--accent);
+        }
+
+        .chairman-content h3 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .chairman-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .chairman-org {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .chairman-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+            margin-bottom: 25px;
+        }
+
+        .chairman-bio {
+            font-size: 1.1rem;
+            color: var(--text);
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .chairman-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(230,0,18,0.05) 0%, rgba(230,0,18,0.02) 100%);
+            border-radius: 16px;
+            border: 2px solid rgba(230,0,18,0.1);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        @media (max-width: 992px) {
+            .chairman-profile {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .chairman-image img {
+                height: 350px;
+                max-width: 350px;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .chairman-divider {
+                margin: 0 auto 25px;
+            }
+
+            .chairman-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .chairman-profile {
+                padding: 30px 20px;
+            }
+
+            .chairman-content h3 {
+                font-size: 1.8rem;
+            }
+
+            .chairman-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .chairman-image img {
+                height: 300px;
+            }
+        }
+
         /* Gallery Section */
         .gallery-section {
             padding: 100px 20px;
@@ -1254,6 +1406,7 @@
                 <ul class="desktop-menu">
                     <li><a href="#home" class="active">হোম</a></li>
                     <li><a href="#goal">আমাদের লক্ষ্য</a></li>
+                    <li><a href="#chairman">চেয়ারম্যান</a></li>
                     <li><a href="#gallery">গ্যালারি</a></li>
                     <li><a href="#services">সেবাসমূহ</a></li>
                     <li><a href="#process">প্রক্রিয়া</a></li>
@@ -1278,6 +1431,9 @@
             </a>
             <a href="#goal" onclick="closeMobileMenu()">
                 <i class="fas fa-bullseye"></i> আমাদের লক্ষ্য
+            </a>
+            <a href="#chairman" onclick="closeMobileMenu()">
+                <i class="fas fa-user-tie"></i> চেয়ারম্যান
             </a>
             <a href="#gallery" onclick="closeMobileMenu()">
                 <i class="fas fa-images"></i> গ্যালারি
@@ -1343,6 +1499,50 @@
         </div>
     </section>
 
+    <!-- Chairman Profile Section -->
+    <section class="chairman-section" id="chairman">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">পরিচালনা পর্ষদ</span>
+                <h2>আমাদের চেয়ারম্যান</h2>
+                <p>Japan Education and Job Center এবং RIJIK International Co. Ltd. এর মাননীয় চেয়ারম্যান</p>
+            </div>
+            <div class="chairman-profile">
+                <div class="chairman-image">
+                    <img src="https://i.postimg.cc/BQHLqJvm/1771672824767.jpg" alt="Nagamatsu Faruk Sir - Chairman">
+                    <div class="chairman-badge">
+                        <i class="fas fa-award"></i>
+                        <span>Founder & Chairman</span>
+                    </div>
+                </div>
+                <div class="chairman-content">
+                    <h3>Nagamatsu Faruk Sir</h3>
+                    <p class="chairman-title">মাননীয় চেয়ারম্যান</p>
+                    <p class="chairman-org">Japan Education and Job Center (JEJC) &<br>RIJIK International Co. Ltd.</p>
+                    <div class="chairman-divider"></div>
+                    <p class="chairman-bio">
+                        বাংলাদেশ ও জাপানের মধ্যে শিক্ষা এবং কর্মসংস্থানের সেতুবন্ধন তৈরিতে অগ্রণী ভূমিকা পালন করছেন। 
+                        তাঁর দূরদর্শী নেতৃত্বে হাজারো শিক্ষার্থী জাপানে উচ্চশিক্ষা ও ক্যারিয়ার গড়ার সুযোগ পেয়েছে।
+                    </p>
+                    <div class="chairman-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">১০০০+</span>
+                            <span class="stat-label">সফল শিক্ষার্থী</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">১৫+</span>
+                            <span class="stat-label">বছরের অভিজ্ঞতা</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">৫০+</span>
+                            <span class="stat-label">জাপানি পার্টনার</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery Section -->
     <section class="gallery-section" id="gallery">
         <div class="container">
@@ -1353,45 +1553,45 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=400&h=300&fit=crop" alt="Japanese Class">
+                    <img src="https://i.postimg.cc/m28ccPBw/1771672757988.jpg" alt="ভাষা ক্লাস">
                     <div class="gallery-overlay">
-                        <h4>জাপানি ভাষা ক্লাস</h4>
-                        <p>আমাদের শিক্ষার্থীরা ভাষা শিক্ষায় নিয়োজিত</p>
+                        <h4>ভাষা ক্লাস</h4>
+                        <p>জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" alt="Graduation">
-                    <div class="gallery-overlay">
-                        <h4>সার্টিফিকেট প্রদান</h4>
-                        <p>কোর্স সম্পন্নকারী শিক্ষার্থীদের সার্টিফিকেট প্রদান</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop" alt="Students">
+                    <img src="https://i.postimg.cc/d3n0TfPS/1000183114-01.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী">
                     <div class="gallery-overlay">
                         <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
                         <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=300&fit=crop" alt="Cultural Event">
+                    <img src="https://i.postimg.cc/RhbBmxz5/1771672791308.jpg" alt="ক্যারিয়ার কাউন্সেলিং">
+                    <div class="gallery-overlay">
+                        <h4>ক্যারিয়ার কাউন্সেলিং</h4>
+                        <p>বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.postimg.cc/qMhfKYT7/1771671515070.jpg" alt="সার্টিফিকেট প্রদান অনুষ্ঠান">
+                    <div class="gallery-overlay">
+                        <h4>সার্টিফিকেট প্রদান অনুষ্ঠান</h4>
+                        <p>কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.postimg.cc/CLkgtt6C/1771671453068.jpg" alt="সাংস্কৃতিক অনুষ্ঠান">
                     <div class="gallery-overlay">
                         <h4>সাংস্কৃতিক অনুষ্ঠান</h4>
-                        <p>জাপানি সংস্কৃতি অনুষ্ঠানের আয়োজন</p>
+                        <p>জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop" alt="Study Session">
+                    <img src="https://i.postimg.cc/TPHFhq41/1771671554579.jpg" alt="অফিস পরিবেশ">
                     <div class="gallery-overlay">
-                        <h4>গ্রুপ স্টাডি</h4>
-                        <p>শিক্ষার্থীদের গ্রুপ স্টাডি সেশন</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=300&fit=crop" alt="Counseling">
-                    <div class="gallery-overlay">
-                        <h4>কাউন্সেলিং সেশন</h4>
-                        <p>ব্যক্তিগত ক্যারিয়ার পরামর্শ</p>
+                        <h4>অফিস পরিবেশ</h4>
+                        <p>JEJC এর আধুনিক অফিস সুবিধা</p>
                     </div>
                 </div>
             </div>
@@ -1688,6 +1888,7 @@
                     <ul>
                         <li><a href="#home"><i class="fas fa-chevron-right"></i> হোম</a></li>
                         <li><a href="#goal"><i class="fas fa-chevron-right"></i> আমাদের লক্ষ্য</a></li>
+                        <li><a href="#chairman"><i class="fas fa-chevron-right"></i> চেয়ারম্যান</a></li>
                         <li><a href="#gallery"><i class="fas fa-chevron-right"></i> গ্যালারি</a></li>
                         <li><a href="#services"><i class="fas fa-chevron-right"></i> সেবাসমূহ</a></li>
                         <li><a href="#courses"><i class="fas fa-chevron-right"></i> কোর্স</a></li>
@@ -1706,7 +1907,7 @@
                     <h4>যোগাযোগ</h4>
                     <ul>
                         <li><a href="#contact"><i class="fas fa-map-marker-alt"></i> narayanganj shibu market</a></li>
-                        <li><a href="tel:+8801712345678"><i class="fas fa-phone"></i> +880 1712-345678</a></li>
+                        <li><a href="tel:+8801712345678">i class="fas fa-phone"></i> +880 1712-345678</a></li>
                         <li><a href="mailto:info@jejcbd.com"><i class="fas fa-envelope"></i> info@jejcbd.com</a></li>
                         <li><a href="#"><i class="fas fa-clock"></i> সকাল ৯টা - রাত ৮টা</a></li>
                     </ul>
