@@ -1600,25 +1600,25 @@
                 </div>
 
                 <div class="contact-form">
-                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
-                        <div class="success-message" id="contactSuccess">
-                            <i class="fas fa-check-circle"></i> আপনার বার্তা পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।
+                    <form action="https://formspree.io/f/xwvnrkwv" method="POST">
+                      
+            
                         </div>
                         <div class="form-group">
                             <label>আপনার নাম *</label>
-                            <input type="text" id="contactName" placeholder="পূর্ণ নাম লিখুন" required>
+                            <input type="text" name="name" placeholder="পূর্ণ নাম লিখুন" required>
                         </div>
                         <div class="form-group">
                             <label>মোবাইল নম্বর *</label>
-                            <input type="tel" id="contactPhone" placeholder="০১৭xxxxxxxx" required>
+                            <input type="tel" name="phone" placeholder="০১৭xxxxxxxx" required>
                         </div>
                         <div class="form-group">
                             <label>ইমেইল</label>
-                            <input type="email" id="contactEmail" placeholder="example@email.com">
+                            <input type="email" name="email" placeholder="example@email.com">
                         </div>
                         <div class="form-group">
                             <label>বিষয় *</label>
-                            <select id="contactSubject" required>
+                            <select name="subject" required>
                                 <option value="">নির্বাচন করুন</option>
                                 <option value="admission">ভর্তি সংক্রান্ত</option>
                                 <option value="course">কোর্স তথ্য</option>
@@ -1628,7 +1628,7 @@
                         </div>
                         <div class="form-group">
                             <label>বার্তা</label>
-                            <textarea id="contactMessage" rows="4" placeholder="আপনার বার্তা লিখুন..."></textarea>
+                            <textarea name="message" rows="4" placeholder="আপনার বার্তা লিখুন..."></textarea>
                         </div>
                         <button type="submit" class="btn-submit">
                             <i class="fas fa-paper-plane"></i> বার্তা পাঠান
@@ -1825,7 +1825,7 @@
             }, 3000);
         }
 
-        function handleContactSubmit(e) {
+         {
             e.preventDefault();
             
             // Show success message
