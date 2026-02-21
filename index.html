@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Education and Job Center (JEJC) - জাপানে শিক্ষা ও চাকরি</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e60012;
+            --primary-dark: #b3000e;
+            --secondary: #1a1a2e;
+            --accent: #f4d03f;
+            --light: #f8f9fa;
+            --dark: #0f0f1e;
+            --text: #333;
+            --gray: #666;
+            --border: #e0e0e0;
+            --blue: #0033a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Desktop Menu */
+        .desktop-menu {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .desktop-menu a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .desktop-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .desktop-menu a:hover,
+        .desktop-menu a.active {
+            color: var(--primary);
+        }
+
+        .desktop-menu a:hover::after,
+        .desktop-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white !important;
+            padding: 12px 25px !important;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(230,0,18,0.3);
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230,0,18,0.4);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: white;
+            padding: 30px 20px;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+            z-index: 999;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 15px 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            background: rgba(230,0,18,0.05);
+            color: var(--primary);
+            border-color: var(--primary);
+            padding-left: 25px;
+        }
+
+        .mobile-menu a i {
+            width: 30px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .mobile-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+            color: white !important;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(230,0,18,0.2) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .hero-badge i {
+            color: var(--accent);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent) 0%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(230,0,18,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(230,0,18,0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--secondary);
+            border-color: white;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Goal Section */
+        .goal-section {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(230,0,18,0.1);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .goal-content {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 30px;
+            padding: 50px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .goal-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .goal-content .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 100px 20px;
+            background: var(--light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            height: 300px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px 20px 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            border-color: rgba(230,0,18,0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(230,0,18,0.1) 0%, rgba(230,0,18,0.05) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 100px 20px;
+            background: var(--light);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            z-index: 0;
+        }
+
+        .step {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(230,0,18,0.3);
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Courses Section */
+        .courses-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .courses-section::before {
+            content: '日本語';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: rgba(255,255,255,0.03);
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        .courses-section .section-header h2,
+        .courses-section .section-header p {
+            color: white;
+        }
+
+        .courses-section .section-tag {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            color: var(--text);
+            transition: all 0.4s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .course-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 30px;
+            color: white;
+            position: relative;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .course-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .course-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .course-body {
+            padding: 30px;
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .course-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--gray);
+        }
+
+        .course-features i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .course-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 2px dashed var(--border);
+        }
+
+        .price-tag {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .price-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .btn-enroll {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-enroll:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(230,0,18,0.3);
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--accent) 0%, #f39c12 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-content h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .promo-content p {
+            color: var(--dark);
+            opacity: 0.9;
+        }
+
+        .promo-btn {
+            background: var(--dark);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .promo-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info > p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(230,0,18,0.05);
+            transform: translateX(10px);
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-item div h4 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .contact-item div p {
+            color: var(--gray);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .contact-form {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Hind Siliguri', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(230,0,18,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 20px 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand img {
+            height: 80px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #c3e6cb;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .desktop-menu {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .promo-banner {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .goal-content {
+                padding: 30px;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="https://kimi-web-img.moonshot.cn/img/jejcbd.com/73d05ecac40853abd1695e4c4ecdc7fd49f591d6.webp" alt="JEJC Logo">
+                <div class="logo-text">
+                    <span class="logo-title">Japan Education</span>
+                    <span class="logo-subtitle">and Job Center</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav>
+                <ul class="desktop-menu">
+                    <li><a href="#home" class="active">হোম</a></li>
+                    <li><a href="#goal">আমাদের লক্ষ্য</a></li>
+                    <li><a href="#gallery">গ্যালারি</a></li>
+                    <li><a href="#services">সেবাসমূহ</a></li>
+                    <li><a href="#process">প্রক্রিয়া</a></li>
+                    <li><a href="#courses">কোর্স</a></li>
+                    <li><a href="#contact">যোগাযোগ</a></li>
+                    <li><a href="#" class="nav-cta" onclick="openModal()">ভর্তি হন</a></li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Toggle -->
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home" class="active" onclick="closeMobileMenu()">
+                <i class="fas fa-home"></i> হোম
+            </a>
+            <a href="#goal" onclick="closeMobileMenu()">
+                <i class="fas fa-bullseye"></i> আমাদের লক্ষ্য
+            </a>
+            <a href="#gallery" onclick="closeMobileMenu()">
+                <i class="fas fa-images"></i> গ্যালারি
+            </a>
+            <a href="#services" onclick="closeMobileMenu()">
+                <i class="fas fa-cogs"></i> সেবাসমূহ
+            </a>
+            <a href="#process" onclick="closeMobileMenu()">
+                <i class="fas fa-route"></i> প্রক্রিয়া
+            </a>
+            <a href="#courses" onclick="closeMobileMenu()">
+                <i class="fas fa-graduation-cap"></i> কোর্স
+            </a>
+            <a href="#contact" onclick="closeMobileMenu()">
+                <i class="fas fa-phone"></i> যোগাযোগ
+            </a>
+            <a href="#" class="mobile-cta" onclick="openModal(); closeMobileMenu(); return false;">
+                <i class="fas fa-user-plus"></i> ভর্তি হন
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    <span>বাংলাদেশের বিশ্বস্ত জাপান শিক্ষা প্রতিষ্ঠান</span>
+                </div>
+                <h1>জাপানে আপনার <span>স্বপ্ন পূরণ</span> করুন</h1>
+                <p>Japan Education and Job Center (JEJC) আপনাকে জাপানে উচ্চশিক্ষা ও ক্যারিয়ার গঠনের জন্য সম্পূর্ণ সহায়তা প্রদান করে। ভাষা শিক্ষা থেকে ভিসা প্রসেসিং পর্যন্ত সবকিছু একসাথে।</p>
+                <div class="hero-buttons">
+                    <a href="#courses" class="btn btn-primary">
+                        <i class="fas fa-graduation-cap"></i> কোর্স দেখুন
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-phone"></i> যোগাযোগ করুন
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=400&fit=crop" alt="Japan Education">
+            </div>
+        </div>
+    </section>
+
+    <!-- Goal Section -->
+    <section class="goal-section" id="goal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">আমাদের লক্ষ্য</span>
+                <h2>Our Goal - আমাদের লক্ষ্য</h2>
+                <p>বাংলাদেশ ও জাপানের মধ্যে শিক্ষা এবং কর্মসংস্থানের সেতুবন্ধন</p>
+            </div>
+            <div class="goal-content">
+                <p>আমাদের মূল লক্ষ্য হলো বাংলাদেশের শিক্ষার্থীদের জন্য জাপানে উচ্চশিক্ষা ও ক্যারিয়ার গঠনের একটি <span class="highlight">বিশ্বস্ত পথ তৈরি করা</span>। আমরা এমন এক প্রজন্ম গড়ে তুলতে চাই, যারা জাপানের মতো উন্নত দেশে পড়াশোনা ও কাজের মাধ্যমে নিজেদের ভবিষ্যতকে আরও শক্তিশালী করে তুলবে।</p>
+                
+                <p><span class="highlight">JEJC বিশ্বাস করে</span>, সঠিক দিকনির্দেশনা, সৎ পরামর্শ এবং ধারাবাহিক সহযোগিতার মাধ্যমেই একজন শিক্ষার্থী তার স্বপ্ন পূরণ করতে পারে। আমরা শিক্ষার্থীদের শুধু ভিসা নয়, <span class="highlight">ভাষা শিক্ষা, সংস্কৃতি বোঝা</span> এবং বাস্তব জীবনে ক্যারিয়ার গড়ার পূর্ণ সহায়তা দিয়ে থাকি।</p>
+                
+                <p>আমাদের লক্ষ্য— <span class="highlight">বাংলাদেশ ও জাপানের মধ্যে শিক্ষা, সংস্কৃতি এবং কর্মসংস্থানের একটি স্থায়ী সেতুবন্ধন তৈরি করা</span>, যাতে বাংলাদেশের তরুণ প্রজন্ম গ্লোবাল পর্যায়ে নিজেদের অবস্থান তৈরি করতে পারে।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">গ্যালারি</span>
+                <h2>আমাদের কার্যক্রম</h2>
+                <p>JEJC এর বিভিন্ন কার্যক্রম এবং সাফল্যের মুহূর্ত</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=400&h=300&fit=crop" alt="Japanese Class">
+                    <div class="gallery-overlay">
+                        <h4>জাপানি ভাষা ক্লাস</h4>
+                        <p>আমাদের শিক্ষার্থীরা ভাষা শিক্ষায় নিয়োজিত</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" alt="Graduation">
+                    <div class="gallery-overlay">
+                        <h4>সার্টিফিকেট প্রদান</h4>
+                        <p>কোর্স সম্পন্নকারী শিক্ষার্থীদের সার্টিফিকেট প্রদান</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop" alt="Students">
+                    <div class="gallery-overlay">
+                        <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
+                        <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=300&fit=crop" alt="Cultural Event">
+                    <div class="gallery-overlay">
+                        <h4>সাংস্কৃতিক অনুষ্ঠান</h4>
+                        <p>জাপানি সংস্কৃতি অনুষ্ঠানের আয়োজন</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop" alt="Study Session">
+                    <div class="gallery-overlay">
+                        <h4>গ্রুপ স্টাডি</h4>
+                        <p>শিক্ষার্থীদের গ্রুপ স্টাডি সেশন</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=300&fit=crop" alt="Counseling">
+                    <div class="gallery-overlay">
+                        <h4>কাউন্সেলিং সেশন</h4>
+                        <p>ব্যক্তিগত ক্যারিয়ার পরামর্শ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">আমাদের সেবাসমূহ</span>
+                <h2>যেসব সেবা আমরা প্রদান করি</h2>
+                <p>জাপানে যাওয়ার জন্য প্রয়োজনীয় সমস্ত সেবা একসাথে</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>জাপানি ভাষা শিক্ষা</h3>
+                    <p>JLPT N5 এবং N4 লেভেলের জন্য পেশাদার কোর্স। অভিজ্ঞ শিক্ষকদের মাধ্যমে কার্যকরী ভাষা শিক্ষা।</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h3>ভিসা প্রসেসিং</h3>
+                    <p>স্টুডেন্ট ভিসা এবং ওয়ার্ক ভিসার জন্য সম্পূর্ণ সহায়তা। ডকুমেন্ট প্রিপারেশন থেকে ইন্টারভিউ পর্যন্ত।</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>ভর্তি সহায়তা</h3>
+                    <p>জাপানের সেরা স্কুল, কলেজ এবং বিশ্ববিদ্যালয়ে ভর্তির জন্য গাইডলাইন এবং এপ্লিকেশন সাপোর্ট।</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>জব প্লেসমেন্ট</h3>
+                    <p>জাপানে চাকরির জন্য প্রস্তুতি এবং নিয়োগকারী প্রতিষ্ঠানের সাথে সংযোগ স্থাপন।</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>অ্যাকোমোডেশন</h3>
+                    <p>জাপানে থাকার ব্যবস্থা এবং ডর্মিটরি সংক্রান্ত সম্পূর্ণ সহায়তা প্রদান।</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>পোস্ট-অ্যারাইভাল সাপোর্ট</h3>
+                    <p>জাপানে পৌঁছানোর পর এয়ারপোর্ট পিকআপ, রেজিস্ট্রেশন এবং অন্যান্য সহায়তা।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section" id="process">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">ধাপে ধাপে</span>
+                <h2>জাপানে যাওয়ার প্রক্রিয়া</h2>
+                <p>৫টি সহজ ধাপে জাপানে আপনার স্বপ্ন পূরণ</p>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">১</div>
+                    <h3>কাউন্সেলিং</h3>
+                    <p>আমাদের বিশেষজ্ঞদের সাথে কথা বলে আপনার জন্য সেরা পথ নির্ধারণ করুন</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">২</div>
+                    <h3>ভাষা শিক্ষা</h3>
+                    <p>N5 বা N4 কোর্স সম্পন্ন করুন এবং জাপানি ভাষায় দক্ষতা অর্জন করুন</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">৩</div>
+                    <h3>ডকুমেন্টেশন</h3>
+                    <p>প্রয়োজনীয় সকল কাগজপত্র প্রস্তুত করুন এবং আমরা যাচাই করব</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">৪</div>
+                    <h3>অ্যাপ্লিকেশন</h3>
+                    <p>জাপানের প্রতিষ্ঠানে আবেদন করুন এবং COE এর জন্য অপেক্ষা করুন</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">৫</div>
+                    <h3>ভিসা এবং যাত্রা</h3>
+                    <p>ভিসা পেয়ে জাপান যান এবং নতুন জীবন শুরু করুন</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses-section" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">কোর্সসমূহ</span>
+                <h2>জাপানি ভাষা কোর্স</h2>
+                <p>JLPT পরীক্ষার জন্য প্রস্তুতি নিন আমাদের সাথে</p>
+            </div>
+            <div class="courses-grid">
+                <!-- N5 Course -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-badge">বিগিনার</span>
+                        <h3>JLPT N5 কোর্স</h3>
+                        <p>মৌলিক জাপানি ভাষা শিক্ষা</p>
+                    </div>
+                    <div class="course-body">
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> সময়কাল: ৪ মাস</li>
+                            <li><i class="fas fa-check-circle"></i> ক্লাস: সপ্তাহে ৫ দিন</li>
+                            <li><i class="fas fa-check-circle"></i> হিরাগানা ও কাতাকানা মাস্টারি</li>
+                            <li><i class="fas fa-check-circle"></i> ১০০+ কানজি শিক্ষা</li>
+                            <li><i class="fas fa-check-circle"></i> বেসিক গ্রামার এবং কনভারসেশন</li>
+                            <li><i class="fas fa-check-circle"></i> ফ্রি স্টাডি ম্যাটেরিয়াল</li>
+                        </ul>
+                        <div class="course-price">
+                            <div class="price-tag">
+                                <span class="price-label">কোর্স ফি</span>
+                                <span class="price-value">২০,০০০৳</span>
+                            </div>
+                            <button class="btn-enroll" onclick="openModal()">
+                                <i class="fas fa-user-plus"></i> ভর্তি হন
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- N4 Course -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-badge">ইন্টারমিডিয়েট</span>
+                        <h3>JLPT N4 কোর্স</h3>
+                        <p>মাঝারি স্তরের জাপানি ভাষা</p>
+                    </div>
+                    <div class="course-body">
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> সময়কাল: ৬ মাস</li>
+                            <li><i class="fas fa-check-circle"></i> ক্লাস: সপ্তাহে ৫ দিন</li>
+                            <li><i class="fas fa-check-circle"></i> ৩০০+ কানজি শিক্ষা</li>
+                            <li><i class="fas fa-check-circle"></i> অ্যাডভান্সড গ্রামার</li>
+                            <li><i class="fas fa-check-circle"></i> ব্যবসায়িক জাপানি</li>
+                            <li><i class="fas fa-check-circle"></i> জব প্রিপারেশন ক্লাস</li>
+                        </ul>
+                        <div class="course-price">
+                            <div class="price-tag">
+                                <span class="price-label">কোর্স ফি</span>
+                                <span class="price-value">২০,০০০৳</span>
+                            </div>
+                            <button class="btn-enroll" onclick="openModal()">
+                                <i class="fas fa-user-plus"></i> ভর্তি হন
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promo Banner -->
+            <div class="promo-banner">
+                <div class="promo-content">
+                    <h3><i class="fas fa-gift"></i> বিশেষ ডিসকাউন্ট অফার!</h3>
+                    <p>দুই বন্ধু একসাথে ভর্তি হলে প্রত্যেকে পাবেন ১০% অতিরিক্ত ছাড়!</p>
+                </div>
+                <a href="#" class="promo-btn" onclick="openModal(); return false;">
+                    এখনই আবেদন করুন <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">যোগাযোগ</span>
+                <h2>আমাদের সাথে যোগাযোগ করুন</h2>
+                <p>যেকোনো প্রশ্নের জন্য আমরা সর্বদা প্রস্তুত</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>আমাদের অফিস</h3>
+                    <p>আপনার জাপান স্বপ্ন পূরণের যাত্রা এখান থেকে শুরু হোক। আমাদের বিশেষজ্ঞ টিম আপনাকে সর্বোচ্চ সহায়তা প্রদান করবে।</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>ঠিকানা</h4>
+                                <p>Narayanganj shibu market, Dhaka-1230, Bangladesh</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>ফোন</h4>
+                                <p>+880 1712-345678</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>ইমেইল</h4>
+                                <p>info@jejcbd.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>অফিস সময়</h4>
+                                <p>শনি - বৃহঃ: সকাল ৯টা - রাত ৮টা</p>
+                            </div>
+                        </div>
+                    </div>
+
+  <div class="map-container">
+    <iframe 
+        src="https://www.google.com/maps?q=4th+Floor,+Japan+Education+And+Job+Center,+Ranima+Plaza,+Shibu+Market,+1420+Bus-stand,+Narayanganj+1420&output=embed"
+        width="100%" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+    </iframe>
+</div>
+                </div>
+
+                <div class="contact-form">
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                        <div class="success-message" id="contactSuccess">
+                            <i class="fas fa-check-circle"></i> আপনার বার্তা পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।
+                        </div>
+                        <div class="form-group">
+                            <label>আপনার নাম *</label>
+                            <input type="text" id="contactName" placeholder="পূর্ণ নাম লিখুন" required>
+                        </div>
+                        <div class="form-group">
+                            <label>মোবাইল নম্বর *</label>
+                            <input type="tel" id="contactPhone" placeholder="০১৭xxxxxxxx" required>
+                        </div>
+                        <div class="form-group">
+                            <label>ইমেইল</label>
+                            <input type="email" id="contactEmail" placeholder="example@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>বিষয় *</label>
+                            <select id="contactSubject" required>
+                                <option value="">নির্বাচন করুন</option>
+                                <option value="admission">ভর্তি সংক্রান্ত</option>
+                                <option value="course">কোর্স তথ্য</option>
+                                <option value="visa">ভিসা তথ্য</option>
+                                <option value="other">অন্যান্য</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>বার্তা</label>
+                            <textarea id="contactMessage" rows="4" placeholder="আপনার বার্তা লিখুন..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> বার্তা পাঠান
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://kimi-web-img.moonshot.cn/img/jejcbd.com/73d05ecac40853abd1695e4c4ecdc7fd49f591d6.webp" alt="JEJC Logo">
+                    <p>Japan Education and Job Center - বাংলাদেশের শিক্ষার্থীদের জন্য জাপানে উচ্চশিক্ষা ও ক্যারিয়ার গঠনের বিশ্বস্ত সঙ্গী।</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/jejcbd" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/jejcbd" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://instagram.com/jejcbd" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/8801712345678" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>দ্রুত লিংক</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> হোম</a></li>
+                        <li><a href="#goal"><i class="fas fa-chevron-right"></i> আমাদের লক্ষ্য</a></li>
+                        <li><a href="#gallery"><i class="fas fa-chevron-right"></i> গ্যালারি</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> সেবাসমূহ</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> কোর্স</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>কোর্সসমূহ</h4>
+                    <ul>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> JLPT N5</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> JLPT N4</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> স্পিকিং কোর্স</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> প্রাইভেট ক্লাস</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>যোগাযোগ</h4>
+                    <ul>
+                        <li><a href="#contact"><i class="fas fa-map-marker-alt"></i> narayanganj shibu market</a></li>
+                        <li><a href="tel:+8801712345678"><i class="fas fa-phone"></i> +880 1712-345678</a></li>
+                        <li><a href="mailto:info@jejcbd.com"><i class="fas fa-envelope"></i> info@jejcbd.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> সকাল ৯টা - রাত ৮টা</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ২০২৪ Japan Education and Job Center (JEJC). সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admission Modal -->
+    <div class="modal-overlay" id="admissionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h3><i class="fas fa-user-graduate"></i> অনলাইন ভর্তি ফর্ম</h3>
+                <p>JEJC তে আপনার আবেদন জমা দিন</p>
+            </div>
+            <div class="modal-body">
+                <div class="success-message" id="admissionSuccess">
+                    <i class="fas fa-check-circle"></i> আপনার আবেদন সফলভাবে জমা হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।
+                </div>
+                <form id="admissionForm" onsubmit="handleAdmissionSubmit(event)">
+                    <div class="form-group">
+                        <label>কোর্স নির্বাচন করুন *</label>
+                        <select id="admissionCourse" required>
+                            <option value="">কোর্স নির্বাচন করুন</option>
+                            <option value="n5">JLPT N5 (২০,০০০৳)</option>
+                            <option value="n4">JLPT N4 (২০,০০০৳)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>আপনার নাম *</label>
+                        <input type="text" id="admissionName" placeholder="পূর্ণ নাম লিখুন" required>
+                    </div>
+                    <div class="form-group">
+                        <label>মোবাইল নম্বর *</label>
+                        <input type="tel" id="admissionPhone" placeholder="০১৭xxxxxxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ইমেইল</label>
+                        <input type="email" id="admissionEmail" placeholder="example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>শিক্ষাগত যোগ্যতা *</label>
+                        <select id="admissionEducation" required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="hsc">উচ্চ মাধ্যমিক (HSC)</option>
+                            <option value="bachelor">স্নাতক (Bachelor)</option>
+                            <option value="masters">স্নাতকোত্তর (Masters)</option>
+                            <option value="other">অন্যান্য</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>বর্তমান ঠিকানা</label>
+                        <textarea id="admissionAddress" rows="3" placeholder="আপনার ঠিকানা লিখুন"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> আবেদন জমা দিন
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        function closeMobileMenu() {
+            mobileToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        }
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Active Menu Item on Scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.desktop-menu a, .mobile-menu a');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('admissionModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('admissionModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('admissionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Form Submissions
+        function handleAdmissionSubmit(e) {
+            e.preventDefault();
+            
+            // Show success message
+            document.getElementById('admissionSuccess').classList.add('show');
+            document.getElementById('admissionForm').reset();
+            
+            // Close modal after 3 seconds
+            setTimeout(() => {
+                closeModal();
+                document.getElementById('admissionSuccess').classList.remove('show');
+            }, 3000);
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            
+            // Show success message
+            document.getElementById('contactSuccess').classList.add('show');
+            document.getElementById('contactForm').reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('contactSuccess').classList.remove('show');
+            }, 5000);
+        }
+
+        // Smooth Scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
