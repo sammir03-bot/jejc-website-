@@ -1699,47 +1699,33 @@
                 <p>JEJC তে আপনার আবেদন জমা দিন</p>
             </div>
             <div class="modal-body">
-                <div class="success-message" id="admissionSuccess">
+                
                     <i class="fas fa-check-circle"></i> আপনার আবেদন সফলভাবে জমা হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।
                 </div>
-                <form id="admissionForm" onsubmit="handleAdmissionSubmit(event)">
-                    <div class="form-group">
-                        <label>কোর্স নির্বাচন করুন *</label>
-                        <select id="admissionCourse" required>
-                            <option value="">কোর্স নির্বাচন করুন</option>
-                            <option value="n5">JLPT N5 (২০,০০০৳)</option>
-                            <option value="n4">JLPT N4 (২০,০০০৳)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>আপনার নাম *</label>
-                        <input type="text" id="admissionName" placeholder="পূর্ণ নাম লিখুন" required>
-                    </div>
-                    <div class="form-group">
-                        <label>মোবাইল নম্বর *</label>
-                        <input type="tel" id="admissionPhone" placeholder="০১৭xxxxxxxx" required>
-                    </div>
-                    <div class="form-group">
-                        <label>ইমেইল</label>
-                        <input type="email" id="admissionEmail" placeholder="example@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label>শিক্ষাগত যোগ্যতা *</label>
-                        <select id="admissionEducation" required>
-                            <option value="">নির্বাচন করুন</option>
-                            <option value="hsc">উচ্চ মাধ্যমিক (HSC)</option>
-                            <option value="bachelor">স্নাতক (Bachelor)</option>
-                            <option value="masters">স্নাতকোত্তর (Masters)</option>
-                            <option value="other">অন্যান্য</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>বর্তমান ঠিকানা</label>
-                        <textarea id="admissionAddress" rows="3" placeholder="আপনার ঠিকানা লিখুন"></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-paper-plane"></i> আবেদন জমা দিন
-                    </button>
+                <form action="https://formspree.io/f/xwvnrkwv" method="POST">
+
+<select name="course" required>
+  <option value="">কোর্স নির্বাচন করুন</option>
+  <option value="jlpt">JLPT</option>
+  <option value="spoken">Spoken Japanese</option>
+</select>
+
+<input type="text" name="name" placeholder="পূর্ণ নাম" required>
+
+<input type="tel" name="phone" placeholder="০১৭xxxxxxxx" required>
+
+<input type="email" name="email" placeholder="example@email.com">
+
+<select name="education" required>
+  <option value="">শিক্ষাগত যোগ্যতা</option>
+  <option value="ssc">SSC</option>
+  <option value="hsc">HSC</option>
+</select>
+
+<textarea name="address" placeholder="ঠিকানা লিখুন"></textarea>
+
+<button type="submit">আবেদন করুন</button>
+
                 </form>
             </div>
         </div>
@@ -1810,33 +1796,13 @@
             }
         });
 
-        // Form Submissions
-        function handleAdmissionSubmit(e) {
-            e.preventDefault();
-            
-            // Show success message
-            document.getElementById('admissionSuccess').classList.add('show');
-            document.getElementById('admissionForm').reset();
-            
-            // Close modal after 3 seconds
-            setTimeout(() => {
-                closeModal();
-                document.getElementById('admissionSuccess').classList.remove('show');
-            }, 3000);
+        
         }
 
-         {
-            e.preventDefault();
+         
+          
             
-            // Show success message
-            document.getElementById('contactSuccess').classList.add('show');
-            document.getElementById('contactForm').reset();
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('contactSuccess').classList.remove('show');
-            }, 5000);
-        }
+     
 
         // Smooth Scroll for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
