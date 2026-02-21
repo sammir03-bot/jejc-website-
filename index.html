@@ -955,6 +955,12 @@
             box-shadow: 0 10px 30px rgba(230,0,18,0.3);
         }
 
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Footer */
         .footer {
             background: var(--dark);
@@ -1130,6 +1136,27 @@
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        .spinner.show {
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsive */
@@ -1600,9 +1627,11 @@
                 </div>
 
                 <div class="contact-form">
-                    <form action="https://formspree.io/f/xwvnrkwv" method="POST">
-                      
-            
+                    <form id="contactForm" action="https://formspree.io/f/xwvnrkwv" method="POST">
+                        <input type="hidden" name="_subject" value="JEJC - নতুন যোগাযোগ বার্তা">
+                        <input type="hidden" name="_next" value="">
+                        <div class="success-message" id="contactSuccess">
+                            <i class="fas fa-check-circle"></i> আপনার বার্তা পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।
                         </div>
                         <div class="form-group">
                             <label>আপনার নাম *</label>
@@ -1630,8 +1659,9 @@
                             <label>বার্তা</label>
                             <textarea name="message" rows="4" placeholder="আপনার বার্তা লিখুন..."></textarea>
                         </div>
-                        <button type="submit" class="btn-submit">
-                            <i class="fas fa-paper-plane"></i> বার্তা পাঠান
+                        <button type="submit" class="btn-submit" id="contactSubmitBtn">
+                            <span class="spinner" id="contactSpinner"></span>
+                            <i class="fas fa-paper-plane" id="contactIcon"></i> বার্তা পাঠান
                         </button>
                     </form>
                 </div>
@@ -1699,33 +1729,50 @@
                 <p>JEJC তে আপনার আবেদন জমা দিন</p>
             </div>
             <div class="modal-body">
-                
+                <div class="success-message" id="admissionSuccess">
                     <i class="fas fa-check-circle"></i> আপনার আবেদন সফলভাবে জমা হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।
                 </div>
-                <form action="https://formspree.io/f/xwvnrkwv" method="POST">
-
-<select name="course" required>
-  <option value="">কোর্স নির্বাচন করুন</option>
-  <option value="jlpt">JLPT</option>
-  <option value="spoken">Spoken Japanese</option>
-</select>
-
-<input type="text" name="name" placeholder="পূর্ণ নাম" required>
-
-<input type="tel" name="phone" placeholder="০১৭xxxxxxxx" required>
-
-<input type="email" name="email" placeholder="example@email.com">
-
-<select name="education" required>
-  <option value="">শিক্ষাগত যোগ্যতা</option>
-  <option value="ssc">SSC</option>
-  <option value="hsc">HSC</option>
-</select>
-
-<textarea name="address" placeholder="ঠিকানা লিখুন"></textarea>
-
-<button type="submit">আবেদন করুন</button>
-
+                <form id="admissionForm" action="https://formspree.io/f/xwvnrkwv" method="POST">
+                    <input type="hidden" name="_subject" value="JEJC - নতুন ভর্তি আবেদন">
+                    <input type="hidden" name="_next" value="">
+                    <div class="form-group">
+                        <label>কোর্স নির্বাচন করুন *</label>
+                        <select name="course" required>
+                            <option value="">কোর্স নির্বাচন করুন</option>
+                            <option value="n5">JLPT N5 (২০,০০০৳)</option>
+                            <option value="n4">JLPT N4 (২০,০০০৳)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>আপনার নাম *</label>
+                        <input type="text" name="name" placeholder="পূর্ণ নাম লিখুন" required>
+                    </div>
+                    <div class="form-group">
+                        <label>মোবাইল নম্বর *</label>
+                        <input type="tel" name="phone" placeholder="০১৭xxxxxxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ইমেইল</label>
+                        <input type="email" name="email" placeholder="example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>শিক্ষাগত যোগ্যতা *</label>
+                        <select name="education" required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="hsc">উচ্চ মাধ্যমিক (HSC)</option>
+                            <option value="bachelor">স্নাতক (Bachelor)</option>
+                            <option value="masters">স্নাতকোত্তর (Masters)</option>
+                            <option value="other">অন্যান্য</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>বর্তমান ঠিকানা</label>
+                        <textarea name="address" rows="3" placeholder="আপনার ঠিকানা লিখুন"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" id="admissionSubmitBtn">
+                        <span class="spinner" id="admissionSpinner"></span>
+                        <i class="fas fa-paper-plane" id="admissionIcon"></i> আবেদন জমা দিন
+                    </button>
                 </form>
             </div>
         </div>
@@ -1796,13 +1843,98 @@
             }
         });
 
-        
-        }
+        // Handle Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const contactSubmitBtn = document.getElementById('contactSubmitBtn');
+        const contactSpinner = document.getElementById('contactSpinner');
+        const contactIcon = document.getElementById('contactIcon');
+        const contactSuccess = document.getElementById('contactSuccess');
 
-         
-          
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-     
+            // Show loading state
+            contactSubmitBtn.disabled = true;
+            contactSpinner.classList.add('show');
+            contactIcon.style.display = 'none';
+            
+            const formData = new FormData(contactForm);
+            
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show success message
+                    contactSuccess.classList.add('show');
+                    contactForm.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        contactSuccess.classList.remove('show');
+                    }, 5000);
+                } else {
+                    alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+                }
+            }).catch(error => {
+                alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+            }).finally(() => {
+                // Reset button state
+                contactSubmitBtn.disabled = false;
+                contactSpinner.classList.remove('show');
+                contactIcon.style.display = 'inline-block';
+            });
+        });
+
+        // Handle Admission Form Submission
+        const admissionForm = document.getElementById('admissionForm');
+        const admissionSubmitBtn = document.getElementById('admissionSubmitBtn');
+        const admissionSpinner = document.getElementById('admissionSpinner');
+        const admissionIcon = document.getElementById('admissionIcon');
+        const admissionSuccess = document.getElementById('admissionSuccess');
+
+        admissionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            admissionSubmitBtn.disabled = true;
+            admissionSpinner.classList.add('show');
+            admissionIcon.style.display = 'none';
+            
+            const formData = new FormData(admissionForm);
+            
+            fetch(admissionForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show success message
+                    admissionSuccess.classList.add('show');
+                    admissionForm.reset();
+                    
+                    // Close modal after 3 seconds
+                    setTimeout(() => {
+                        closeModal();
+                        admissionSuccess.classList.remove('show');
+                    }, 3000);
+                } else {
+                    alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+                }
+            }).catch(error => {
+                alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+            }).finally(() => {
+                // Reset button state
+                admissionSubmitBtn.disabled = false;
+                admissionSpinner.classList.remove('show');
+                admissionIcon.style.display = 'inline-block';
+            });
+        });
 
         // Smooth Scroll for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1822,4 +1954,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
