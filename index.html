@@ -4,9 +4,9 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Japan Education and Job Center (JEJC) - জাপানে শিক্ষা ও চাকরি | Study in Japan from Bangladesh</title>
-   <link rel="icon" type="image/png" href="https://sammir03-bot.github.io/jejc-website-/favicon.png">
-<link rel="shortcut icon" href="https://sammir03-bot.github.io/jejc-website-/favicon.png">
-<link rel="apple-touch-icon" href="https://sammir03-bot.github.io/jejc-website-/favicon.png">
+   <link rel="icon" type="image/png" href="favicon.png">
+<link rel="shortcut icon" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
    <meta name="description" content="বাংলাদেশ থেকে জাপানে পড়াশোনার সেরা প্রতিষ্ঠান। Japan student visa, JLPT N5 N4 N3 কোর্স, খরচ, পার্ট-টাইম জব এবং পড়াশোনা শেষে কাজের সুযোগ সম্পর্কে বিস্তারিত তথ্য পান। ১৫+ বছরের অভিজ্ঞতা, ১০০০+ সফল শিক্ষার্থী।">
    <meta name="keywords" content="Study in Japan from Bangladesh, Japan education consultancy Bangladesh, Japan student visa requirements, Japanese language course N5 N4 N3, Cost of studying in Japan, Part-time job in Japan for students, Work in Japan after study, জাপানে পড়াশোনা, জাপান স্টুডেন্ট ভিসা">
 
@@ -676,25 +676,81 @@
            }
        }
 
-       /* Gallery Section */
+       /* Gallery Section - Updated Mobile Friendly */
        .gallery-section {
            padding: 100px 20px;
            background: var(--light);
        }
 
+       .gallery-filter-container {
+           display: flex;
+           gap: 10px;
+           margin-bottom: 40px;
+           flex-wrap: wrap;
+           justify-content: center;
+       }
+
+       .gallery-filter {
+           padding: 10px 20px;
+           border: 2px solid var(--border);
+           background: white;
+           border-radius: 50px;
+           cursor: pointer;
+           font-family: 'Hind Siliguri', sans-serif;
+           font-weight: 600;
+           color: var(--gray);
+           transition: all 0.3s ease;
+           font-size: 0.9rem;
+       }
+
+       .gallery-filter:hover,
+       .gallery-filter.active {
+           background: var(--primary);
+           color: white;
+           border-color: var(--primary);
+           transform: translateY(-2px);
+           box-shadow: 0 5px 15px rgba(230,0,18,0.3);
+       }
+
+       .gallery-category {
+           margin-bottom: 50px;
+       }
+
+       .gallery-category-title {
+           font-size: 1.5rem;
+           color: var(--secondary);
+           margin-bottom: 25px;
+           display: flex;
+           align-items: center;
+           gap: 10px;
+           padding-bottom: 10px;
+           border-bottom: 2px solid var(--border);
+       }
+
+       .gallery-category-title i {
+           color: var(--primary);
+       }
+
        .gallery-grid {
            display: grid;
-           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+           grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
            gap: 20px;
        }
 
        .gallery-item {
            position: relative;
            overflow: hidden;
-           border-radius: 20px;
-           height: 300px;
+           border-radius: 16px;
+           height: 220px;
            cursor: pointer;
-           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+           box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+           transition: all 0.4s ease;
+           background: #f0f0f0;
+       }
+
+       .gallery-item:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 15px 30px rgba(0,0,0,0.2);
        }
 
        .gallery-item img {
@@ -713,15 +769,189 @@
            bottom: 0;
            left: 0;
            right: 0;
-           background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+           background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
            padding: 30px 20px 20px;
            color: white;
            transform: translateY(100%);
-           transition: transform 0.3s ease;
+           transition: transform 0.4s ease;
        }
 
        .gallery-item:hover .gallery-overlay {
            transform: translateY(0);
+       }
+
+       .gallery-overlay h4 {
+           font-size: 1.1rem;
+           margin-bottom: 5px;
+           font-weight: 600;
+       }
+
+       .gallery-overlay p {
+           font-size: 0.9rem;
+           opacity: 0.9;
+           margin: 0;
+       }
+
+       /* Lightbox */
+       .lightbox {
+           display: none;
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(0,0,0,0.95);
+           z-index: 9999;
+           justify-content: center;
+           align-items: center;
+           padding: 20px;
+       }
+
+       .lightbox.active {
+           display: flex;
+       }
+
+       .lightbox-content {
+           position: relative;
+           max-width: 90%;
+           max-height: 90%;
+       }
+
+       .lightbox-img {
+           max-width: 100%;
+           max-height: 85vh;
+           border-radius: 12px;
+           box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+       }
+
+       .lightbox-close {
+           position: absolute;
+           top: -50px;
+           right: 0;
+           color: white;
+           font-size: 2.5rem;
+           cursor: pointer;
+           background: none;
+           border: none;
+           width: 50px;
+           height: 50px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: transform 0.3s ease;
+       }
+
+       .lightbox-close:hover {
+           transform: rotate(90deg);
+       }
+
+       .lightbox-nav {
+           position: absolute;
+           top: 50%;
+           transform: translateY(-50%);
+           background: rgba(255,255,255,0.2);
+           color: white;
+           border: none;
+           width: 50px;
+           height: 50px;
+           border-radius: 50%;
+           cursor: pointer;
+           font-size: 1.2rem;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.3s ease;
+           backdrop-filter: blur(10px);
+       }
+
+       .lightbox-nav:hover {
+           background: var(--primary);
+           transform: translateY(-50%) scale(1.1);
+       }
+
+       .lightbox-prev {
+           left: -80px;
+       }
+
+       .lightbox-next {
+           right: -80px;
+       }
+
+       .lightbox-caption {
+           position: absolute;
+           bottom: -60px;
+           left: 0;
+           right: 0;
+           text-align: center;
+           color: white;
+           font-size: 1.1rem;
+           font-weight: 500;
+       }
+
+       /* Mobile Responsive Gallery */
+       @media (max-width: 768px) {
+           .gallery-grid {
+               grid-template-columns: repeat(2, 1fr);
+               gap: 12px;
+           }
+
+           .gallery-item {
+               height: 160px;
+           }
+
+           .gallery-filter-container {
+               gap: 8px;
+               margin-bottom: 30px;
+               overflow-x: auto;
+               flex-wrap: nowrap;
+               justify-content: flex-start;
+               padding-bottom: 10px;
+               -webkit-overflow-scrolling: touch;
+           }
+
+           .gallery-filter {
+               padding: 8px 16px;
+               font-size: 0.85rem;
+               white-space: nowrap;
+           }
+
+           .gallery-category-title {
+               font-size: 1.2rem;
+               margin-bottom: 15px;
+           }
+
+           .lightbox-prev {
+               left: 10px;
+               width: 40px;
+               height: 40px;
+           }
+
+           .lightbox-next {
+               right: 10px;
+               width: 40px;
+               height: 40px;
+           }
+
+           .lightbox-caption {
+               font-size: 0.95rem;
+               bottom: -50px;
+               padding: 0 20px;
+           }
+       }
+
+       @media (max-width: 480px) {
+           .gallery-section {
+               padding: 60px 15px;
+           }
+
+           .gallery-grid {
+               grid-template-columns: 1fr;
+               gap: 15px;
+           }
+
+           .gallery-item {
+               height: 220px;
+           }
        }
 
        /* Services Section */
@@ -2068,10 +2298,6 @@
                display: none;
            }
 
-           .gallery-grid {
-               grid-template-columns: 1fr;
-           }
-
            .stats-grid {
                grid-template-columns: 1fr;
            }
@@ -2494,7 +2720,7 @@
        </div>
    </section>
 
-   <!-- Gallery Section -->
+   <!-- Gallery Section - Updated with organized categories and mobile friendly -->
    <section class="gallery-section" id="gallery">
        <div class="container">
            <div class="section-header reveal">
@@ -2502,52 +2728,292 @@
                <h2>আমাদের কার্যক্রম</h2>
                <p>JEJC এর বিভিন্ন কার্যক্রম এবং সাফল্যের মুহূর্ত</p>
            </div>
-           <div class="gallery-grid reveal">
-               <div class="gallery-item">
-                   <img src="https://i.postimg.cc/m28ccPBw/1771672757988.jpg" alt="ভাষা ক্লাস">
-                   <div class="gallery-overlay">
-                       <h4>ভাষা ক্লাস</h4>
-                       <p>জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</p>
+
+           <!-- Filter Buttons -->
+           <div class="gallery-filter-container reveal">
+               <button class="gallery-filter active" onclick="filterGallery('all')">সব ছবি</button>
+               <button class="gallery-filter" onclick="filterGallery('students')">সাফল্যমণ্ডিত শিক্ষার্থী</button>
+               <button class="gallery-filter" onclick="filterGallery('class')">ভাষা ক্লাস</button>
+               <button class="gallery-filter" onclick="filterGallery('certificate')">সার্টিফিকেট প্রদান</button>
+               <button class="gallery-filter" onclick="filterGallery('counseling')">ক্যারিয়ার কাউন্সেলিং</button>
+               <button class="gallery-filter" onclick="filterGallery('cultural')">সাংস্কৃতিক অনুষ্ঠান</button>
+               <button class="gallery-filter" onclick="filterGallery('office')">অফিস পরিবেশ</button>
+           </div>
+
+           <!-- Gallery Content -->
+           <div class="gallery-content" id="galleryContent">
+               
+               <!-- সাফল্যমণ্ডিত শিক্ষার্থী -->
+               <div class="gallery-category reveal" data-category="students">
+                   <h3 class="gallery-category-title"><i class="fas fa-user-graduate"></i> সাফল্যমণ্ডিত শিক্ষার্থী - জাপানে গমনকারী শিক্ষার্থীদের সাথে</h3>
+                   <div class="gallery-grid">
+                       <div class="gallery-item" onclick="openLightbox(0)">
+                           <img src="https://i.postimg.cc/MTHYVdm4/1000183114-01.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ১" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
+                               <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(1)">
+                           <img src="https://i.postimg.cc/sD4wFQxm/1771994215945.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ২" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
+                               <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(2)">
+                           <img src="https://i.postimg.cc/qRKx1gW9/1771994920772.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ৩" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
+                               <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(3)">
+                           <img src="https://i.postimg.cc/CxdDvzqR/1771807649023.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ৪" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
+                               <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(4)">
+                           <img src="https://i.postimg.cc/B6JnVVVg/1772008988449.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ৫" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
+                               <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(5)">
+                           <img src="https://i.postimg.cc/JhzT6mWf/1772010126279.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ৬" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
+                               <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
+                           </div>
+                       </div>
                    </div>
                </div>
-               <div class="gallery-item">
-                   <img src="https://i.postimg.cc/d3n0TfPS/1000183114-01.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী">
-                   <div class="gallery-overlay">
-                       <h4>সাফল্যমণ্ডিত শিক্ষার্থী</h4>
-                       <p>জাপানে গমনকারী শিক্ষার্থীদের সাথে</p>
+
+               <!-- ভাষা ক্লাস -->
+               <div class="gallery-category reveal" data-category="class">
+                   <h3 class="gallery-category-title"><i class="fas fa-chalkboard-teacher"></i> ভাষা ক্লাস - জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</h3>
+                   <div class="gallery-grid">
+                       <div class="gallery-item" onclick="openLightbox(6)">
+                           <img src="https://i.postimg.cc/BnYW0wt6/1771994258113.jpg" alt="ভাষা ক্লাস ১" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ভাষা ক্লাস</h4>
+                               <p>জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(7)">
+                           <img src="https://i.postimg.cc/ZnZs3r06/1771994266481.jpg" alt="ভাষা ক্লাস ২" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ভাষা ক্লাস</h4>
+                               <p>জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(8)">
+                           <img src="https://i.postimg.cc/L8ffdGxP/1772009007833.jpg" alt="ভাষা ক্লাস ৩" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ভাষা ক্লাস</h4>
+                               <p>জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(9)">
+                           <img src="https://i.postimg.cc/Hs885fDR/1772009011937.jpg" alt="ভাষা ক্লাস ৪" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ভাষা ক্লাস</h4>
+                               <p>জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(10)">
+                           <img src="https://i.postimg.cc/k5s2qCK2/1772009015846.jpg" alt="ভাষা ক্লাস ৫" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ভাষা ক্লাস</h4>
+                               <p>জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(11)">
+                           <img src="https://i.postimg.cc/qBSzkjhz/1772009026764.jpg" alt="ভাষা ক্লাস ৬" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ভাষা ক্লাস</h4>
+                               <p>জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</p>
+                           </div>
+                       </div>
                    </div>
                </div>
-               <div class="gallery-item">
-                   <img src="https://i.postimg.cc/RhbBmxz5/1771672791308.jpg" alt="ক্যারিয়ার কাউন্সেলিং">
-                   <div class="gallery-overlay">
-                       <h4>ক্যারিয়ার কাউন্সেলিং</h4>
-                       <p>বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন</p>
+
+               <!-- সার্টিফিকেট প্রদান অনুষ্ঠান -->
+               <div class="gallery-category reveal" data-category="certificate">
+                   <h3 class="gallery-category-title"><i class="fas fa-certificate"></i> সার্টিফিকেট প্রদান অনুষ্ঠান - কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান</h3>
+                   <div class="gallery-grid">
+                       <div class="gallery-item" onclick="openLightbox(12)">
+                           <img src="https://i.postimg.cc/FF37H0jB/1771994802176.jpg" alt="সার্টিফিকেট প্রদান ১" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সার্টিফিকেট প্রদান অনুষ্ঠান</h4>
+                               <p>কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(13)">
+                           <img src="https://i.postimg.cc/gjWcZBV9/1771994806403.jpg" alt="সার্টিফিকেট প্রদান ২" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সার্টিফিকেট প্রদান অনুষ্ঠান</h4>
+                               <p>কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(14)">
+                           <img src="https://i.postimg.cc/htfnfqHY/1771994441848.jpg" alt="সার্টিফিকেট প্রদান ৩" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সার্টিফিকেট প্রদান অনুষ্ঠান</h4>
+                               <p>কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(15)">
+                           <img src="https://i.postimg.cc/j5rYgnLy/1771994430307.jpg" alt="সার্টিফিকেট প্রদান ৪" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সার্টিফিকেট প্রদান অনুষ্ঠান</h4>
+                               <p>কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান</p>
+                           </div>
+                       </div>
                    </div>
                </div>
-               <div class="gallery-item">
-                   <img src="https://i.postimg.cc/qMhfKYT7/1771671515070.jpg" alt="সার্টিফিকেট প্রদান অনুষ্ঠান">
-                   <div class="gallery-overlay">
-                       <h4>সার্টিফিকেট প্রদান অনুষ্ঠান</h4>
-                       <p>কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান</p>
+
+               <!-- ক্যারিয়ার কাউন্সেলিং -->
+               <div class="gallery-category reveal" data-category="counseling">
+                   <h3 class="gallery-category-title"><i class="fas fa-user-tie"></i> ক্যারিয়ার কাউন্সেলিং - বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন</h3>
+                   <div class="gallery-grid">
+                       <div class="gallery-item" onclick="openLightbox(16)">
+                           <img src="https://i.postimg.cc/d19p5HMK/1771994380985.jpg" alt="ক্যারিয়ার কাউন্সেলিং ১" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ক্যারিয়ার কাউন্সেলিং</h4>
+                               <p>বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(17)">
+                           <img src="https://i.postimg.cc/9fmGGJYv/1772009740532.jpg" alt="ক্যারিয়ার কাউন্সেলিং ২" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ক্যারিয়ার কাউন্সেলিং</h4>
+                               <p>বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(18)">
+                           <img src="https://i.postimg.cc/y6kP3vVc/1772009761248.jpg" alt="ক্যারিয়ার কাউন্সেলিং ৩" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ক্যারিয়ার কাউন্সেলিং</h4>
+                               <p>বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(19)">
+                           <img src="https://i.postimg.cc/vm0rc6Cb/1772009770672.jpg" alt="ক্যারিয়ার কাউন্সেলিং ৪" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>ক্যারিয়ার কাউন্সেলিং</h4>
+                               <p>বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন</p>
+                           </div>
+                       </div>
                    </div>
                </div>
-               <div class="gallery-item">
-                   <img src="https://i.postimg.cc/CLkgtt6C/1771671453068.jpg" alt="সাংস্কৃতিক অনুষ্ঠান">
-                   <div class="gallery-overlay">
-                       <h4>সাংস্কৃতিক অনুষ্ঠান</h4>
-                       <p>জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান</p>
+
+               <!-- সাংস্কৃতিক অনুষ্ঠান -->
+               <div class="gallery-category reveal" data-category="cultural">
+                   <h3 class="gallery-category-title"><i class="fas fa-torii-gate"></i> সাংস্কৃতিক অনুষ্ঠান - জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান</h3>
+                   <div class="gallery-grid">
+                       <div class="gallery-item" onclick="openLightbox(20)">
+                           <img src="https://i.postimg.cc/FKzfCCnv/1771994397442.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ১" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাংস্কৃতিক অনুষ্ঠান</h4>
+                               <p>জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(21)">
+                           <img src="https://i.postimg.cc/90YFQyND/1771994394830.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ২" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাংস্কৃতিক অনুষ্ঠান</h4>
+                               <p>জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(22)">
+                           <img src="https://i.postimg.cc/CKnhf3QZ/1771994387885.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ৩" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাংস্কৃতিক অনুষ্ঠান</h4>
+                               <p>জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(23)">
+                           <img src="https://i.postimg.cc/FKzfCCnv/1771994397442.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ৪" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাংস্কৃতিক অনুষ্ঠান</h4>
+                               <p>জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(24)">
+                           <img src="https://i.postimg.cc/9fmGGJYv/1772009740532.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ৫" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>সাংস্কৃতিক অনুষ্ঠান</h4>
+                               <p>জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান</p>
+                           </div>
+                       </div>
                    </div>
                </div>
-               <div class="gallery-item">
-                   <img src="https://i.postimg.cc/TPHFhq41/1771671554579.jpg" alt="অফিস পরিবেশ">
-                   <div class="gallery-overlay">
-                       <h4>অফিস পরিবেশ</h4>
-                       <p>JEJC এর আধুনিক অফিস সুবিধা</p>
+
+               <!-- অফিস পরিবেশ -->
+               <div class="gallery-category reveal" data-category="office">
+                   <h3 class="gallery-category-title"><i class="fas fa-building"></i> অফিস পরিবেশ - JEJC এর আধুনিক অফিস সুবিধা</h3>
+                   <div class="gallery-grid">
+                       <div class="gallery-item" onclick="openLightbox(25)">
+                           <img src="https://i.postimg.cc/h4zYRS7X/1772010108639.jpg" alt="অফিস পরিবেশ ১" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>অফিস পরিবেশ</h4>
+                               <p>JEJC এর আধুনিক অফিস সুবিধা</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(26)">
+                           <img src="https://i.postimg.cc/JhzT6mWf/1772010126279.jpg" alt="অফিস পরিবেশ ২" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>অফিস পরিবেশ</h4>
+                               <p>JEJC এর আধুনিক অফিস সুবিধা</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(27)">
+                           <img src="https://i.postimg.cc/8k6Zntqp/1772010102857.jpg" alt="অফিস পরিবেশ ৩" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>অফিস পরিবেশ</h4>
+                               <p>JEJC এর আধুনিক অফিস সুবিধা</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(28)">
+                           <img src="https://i.postimg.cc/t4XDJy7z/1772010095695.jpg" alt="অফিস পরিবেশ ৪" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>অফিস পরিবেশ</h4>
+                               <p>JEJC এর আধুনিক অফিস সুবিধা</p>
+                           </div>
+                       </div>
+                       <div class="gallery-item" onclick="openLightbox(29)">
+                           <img src="https://i.postimg.cc/J0Nc7dLQ/1772010098772.jpg" alt="অফিস পরিবেশ ৫" loading="lazy">
+                           <div class="gallery-overlay">
+                               <h4>অফিস পরিবেশ</h4>
+                               <p>JEJC এর আধুনিক অফিস সুবিধা</p>
+                           </div>
+                       </div>
                    </div>
                </div>
            </div>
        </div>
    </section>
+
+   <!-- Lightbox -->
+   <div class="lightbox" id="lightbox">
+       <div class="lightbox-content">
+           <button class="lightbox-close" onclick="closeLightbox()">
+               <i class="fas fa-times"></i>
+           </button>
+           <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">
+               <i class="fas fa-chevron-left"></i>
+           </button>
+           <img src="" alt="" class="lightbox-img" id="lightboxImg">
+           <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">
+               <i class="fas fa-chevron-right"></i>
+           </button>
+           <div class="lightbox-caption" id="lightboxCaption"></div>
+       </div>
+   </div>
 
    <!-- Services Section -->
    <section class="services-section" id="services" itemscope itemtype="https://schema.org/Service">
@@ -3201,6 +3667,142 @@
    </div>
 
    <script>
+       // Gallery Data
+       const galleryImages = [
+           { src: "https://i.postimg.cc/MTHYVdm4/1000183114-01.jpg", title: "সাফল্যমণ্ডিত শিক্ষার্থী", desc: "জাপানে গমনকারী শিক্ষার্থীদের সাথে" },
+           { src: "https://i.postimg.cc/sD4wFQxm/1771994215945.jpg", title: "সাফল্যমণ্ডিত শিক্ষার্থী", desc: "জাপানে গমনকারী শিক্ষার্থীদের সাথে" },
+           { src: "https://i.postimg.cc/qRKx1gW9/1771994920772.jpg", title: "সাফল্যমণ্ডিত শিক্ষার্থী", desc: "জাপানে গমনকারী শিক্ষার্থীদের সাথে" },
+           { src: "https://i.postimg.cc/CxdDvzqR/1771807649023.jpg", title: "সাফল্যমণ্ডিত শিক্ষার্থী", desc: "জাপানে গমনকারী শিক্ষার্থীদের সাথে" },
+           { src: "https://i.postimg.cc/B6JnVVVg/1772008988449.jpg", title: "সাফল্যমণ্ডিত শিক্ষার্থী", desc: "জাপানে গমনকারী শিক্ষার্থীদের সাথে" },
+           { src: "https://i.postimg.cc/JhzT6mWf/1772010126279.jpg", title: "সাফল্যমণ্ডিত শিক্ষার্থী", desc: "জাপানে গমনকারী শিক্ষার্থীদের সাথে" },
+           { src: "https://i.postimg.cc/BnYW0wt6/1771994258113.jpg", title: "ভাষা ক্লাস", desc: "জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন" },
+           { src: "https://i.postimg.cc/ZnZs3r06/1771994266481.jpg", title: "ভাষা ক্লাস", desc: "জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন" },
+           { src: "https://i.postimg.cc/L8ffdGxP/1772009007833.jpg", title: "ভাষা ক্লাস", desc: "জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন" },
+           { src: "https://i.postimg.cc/Hs885fDR/1772009011937.jpg", title: "ভাষা ক্লাস", desc: "জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন" },
+           { src: "https://i.postimg.cc/k5s2qCK2/1772009015846.jpg", title: "ভাষা ক্লাস", desc: "জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন" },
+           { src: "https://i.postimg.cc/qBSzkjhz/1772009026764.jpg", title: "ভাষা ক্লাস", desc: "জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন" },
+           { src: "https://i.postimg.cc/FF37H0jB/1771994802176.jpg", title: "সার্টিফিকেট প্রদান অনুষ্ঠান", desc: "কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান" },
+           { src: "https://i.postimg.cc/gjWcZBV9/1771994806403.jpg", title: "সার্টিফিকেট প্রদান অনুষ্ঠান", desc: "কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান" },
+           { src: "https://i.postimg.cc/htfnfqHY/1771994441848.jpg", title: "সার্টিফিকেট প্রদান অনুষ্ঠান", desc: "কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান" },
+           { src: "https://i.postimg.cc/j5rYgnLy/1771994430307.jpg", title: "সার্টিফিকেট প্রদান অনুষ্ঠান", desc: "কোর্স সম্পন্নকারীদের সার্টিফিকেট প্রদান" },
+           { src: "https://i.postimg.cc/d19p5HMK/1771994380985.jpg", title: "ক্যারিয়ার কাউন্সেলিং", desc: "বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন" },
+           { src: "https://i.postimg.cc/9fmGGJYv/1772009740532.jpg", title: "ক্যারিয়ার কাউন্সেলিং", desc: "বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন" },
+           { src: "https://i.postimg.cc/y6kP3vVc/1772009761248.jpg", title: "ক্যারিয়ার কাউন্সেলিং", desc: "বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন" },
+           { src: "https://i.postimg.cc/vm0rc6Cb/1772009770672.jpg", title: "ক্যারিয়ার কাউন্সেলিং", desc: "বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন" },
+           { src: "https://i.postimg.cc/FKzfCCnv/1771994397442.jpg", title: "সাংস্কৃতিক অনুষ্ঠান", desc: "জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান" },
+           { src: "https://i.postimg.cc/90YFQyND/1771994394830.jpg", title: "সাংস্কৃতিক অনুষ্ঠান", desc: "জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান" },
+           { src: "https://i.postimg.cc/CKnhf3QZ/1771994387885.jpg", title: "সাংস্কৃতিক অনুষ্ঠান", desc: "জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান" },
+           { src: "https://i.postimg.cc/FKzfCCnv/1771994397442.jpg", title: "সাংস্কৃতিক অনুষ্ঠান", desc: "জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান" },
+           { src: "https://i.postimg.cc/9fmGGJYv/1772009740532.jpg", title: "সাংস্কৃতিক অনুষ্ঠান", desc: "জাপানি সংস্কৃতি পরিচিতি অনুষ্ঠান" },
+           { src: "https://i.postimg.cc/h4zYRS7X/1772010108639.jpg", title: "অফিস পরিবেশ", desc: "JEJC এর আধুনিক অফিস সুবিধা" },
+           { src: "https://i.postimg.cc/JhzT6mWf/1772010126279.jpg", title: "অফিস পরিবেশ", desc: "JEJC এর আধুনিক অফিস সুবিধা" },
+           { src: "https://i.postimg.cc/8k6Zntqp/1772010102857.jpg", title: "অফিস পরিবেশ", desc: "JEJC এর আধুনিক অফিস সুবিধা" },
+           { src: "https://i.postimg.cc/t4XDJy7z/1772010095695.jpg", title: "অফিস পরিবেশ", desc: "JEJC এর আধুনিক অফিস সুবিধা" },
+           { src: "https://i.postimg.cc/J0Nc7dLQ/1772010098772.jpg", title: "অফিস পরিবেশ", desc: "JEJC এর আধুনিক অফিস সুবিধা" }
+       ];
+
+       let currentImageIndex = 0;
+
+       // Gallery Filter Function
+       function filterGallery(category) {
+           const buttons = document.querySelectorAll('.gallery-filter');
+           const categories = document.querySelectorAll('.gallery-category');
+           
+           buttons.forEach(btn => {
+               btn.classList.remove('active');
+               if (btn.getAttribute('onclick').includes(category)) {
+                   btn.classList.add('active');
+               }
+           });
+           
+           categories.forEach(cat => {
+               if (category === 'all' || cat.getAttribute('data-category') === category) {
+                   cat.style.display = 'block';
+                   setTimeout(() => {
+                       cat.style.opacity = '1';
+                       cat.style.transform = 'translateY(0)';
+                   }, 10);
+               } else {
+                   cat.style.opacity = '0';
+                   cat.style.transform = 'translateY(20px)';
+                   setTimeout(() => {
+                       cat.style.display = 'none';
+                   }, 300);
+               }
+           });
+       }
+
+       // Lightbox Functions
+       function openLightbox(index) {
+           currentImageIndex = index;
+           const lightbox = document.getElementById('lightbox');
+           const img = document.getElementById('lightboxImg');
+           const caption = document.getElementById('lightboxCaption');
+           
+           img.src = galleryImages[index].src;
+           caption.textContent = galleryImages[index].title + ' - ' + galleryImages[index].desc;
+           lightbox.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       }
+
+       function closeLightbox() {
+           const lightbox = document.getElementById('lightbox');
+           lightbox.classList.remove('active');
+           document.body.style.overflow = 'auto';
+       }
+
+       function changeImage(direction) {
+           currentImageIndex += direction;
+           
+           if (currentImageIndex < 0) {
+               currentImageIndex = galleryImages.length - 1;
+           } else if (currentImageIndex >= galleryImages.length) {
+               currentImageIndex = 0;
+           }
+           
+           const img = document.getElementById('lightboxImg');
+           const caption = document.getElementById('lightboxCaption');
+           
+           img.style.opacity = '0';
+           setTimeout(() => {
+               img.src = galleryImages[currentImageIndex].src;
+               caption.textContent = galleryImages[currentImageIndex].title + ' - ' + galleryImages[currentImageIndex].desc;
+               img.style.opacity = '1';
+           }, 200);
+       }
+
+       // Keyboard navigation for lightbox
+       document.addEventListener('keydown', (e) => {
+           if (document.getElementById('lightbox').classList.contains('active')) {
+               if (e.key === 'Escape') closeLightbox();
+               if (e.key === 'ArrowLeft') changeImage(-1);
+               if (e.key === 'ArrowRight') changeImage(1);
+           }
+       });
+
+       // Swipe support for mobile
+       let touchStartX = 0;
+       let touchEndX = 0;
+
+       document.getElementById('lightbox').addEventListener('touchstart', (e) => {
+           touchStartX = e.changedTouches[0].screenX;
+       });
+
+       document.getElementById('lightbox').addEventListener('touchend', (e) => {
+           touchEndX = e.changedTouches[0].screenX;
+           handleSwipe();
+       });
+
+       function handleSwipe() {
+           if (touchEndX < touchStartX - 50) changeImage(1);
+           if (touchEndX > touchStartX + 50) changeImage(-1);
+       }
+
+       // Close lightbox on outside click
+       document.getElementById('lightbox').addEventListener('click', (e) => {
+           if (e.target.id === 'lightbox') closeLightbox();
+       });
+
        // [PREVIOUS JAVASCRIPT REMAINS EXACTLY THE SAME]
        // Mobile Menu Toggle
        const mobileToggle = document.getElementById('mobileToggle');
@@ -3533,4 +4135,4 @@
        });
    </script>
 </body>
-   </html>
+      </html>
