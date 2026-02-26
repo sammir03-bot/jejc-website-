@@ -466,6 +466,100 @@
            50% { transform: translateY(-15px); }
        }
 
+       /* NEW: Speech Bubble Styles - চিহ্নিত জায়গায় যোগ করা হয়েছে */
+       .hero-speech-bubble {
+           position: absolute;
+           top: 15%;
+           left: 50%;
+           transform: translateX(-50%);
+           background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+           color: var(--secondary);
+           padding: 15px 25px;
+           border-radius: 20px;
+           font-size: 1rem;
+           font-weight: 600;
+           box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 0 4px rgba(230,0,18,0.1);
+           z-index: 10;
+           white-space: nowrap;
+           animation: speechFloat 3s ease-in-out infinite, speechPulse 2s ease-in-out infinite;
+           border: 2px solid var(--primary);
+       }
+
+       .hero-speech-bubble::after {
+           content: '';
+           position: absolute;
+           bottom: -12px;
+           left: 50%;
+           transform: translateX(-50%);
+           width: 0;
+           height: 0;
+           border-left: 12px solid transparent;
+           border-right: 12px solid transparent;
+           border-top: 12px solid var(--primary);
+       }
+
+       .hero-speech-bubble .close-speech {
+           position: absolute;
+           top: -10px;
+           right: -10px;
+           width: 24px;
+           height: 24px;
+           background: var(--primary);
+           color: white;
+           border: none;
+           border-radius: 50%;
+           cursor: pointer;
+           font-size: 12px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+           transition: all 0.3s ease;
+       }
+
+       .hero-speech-bubble .close-speech:hover {
+           transform: scale(1.1);
+           background: var(--primary-dark);
+       }
+
+       @keyframes speechFloat {
+           0%, 100% { transform: translateX(-50%) translateY(0); }
+           50% { transform: translateX(-50%) translateY(-10px); }
+       }
+
+       @keyframes speechPulse {
+           0%, 100% { box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 0 4px rgba(230,0,18,0.1); }
+           50% { box-shadow: 0 15px 50px rgba(230,0,18,0.4), 0 0 0 8px rgba(230,0,18,0.05); }
+       }
+
+       /* Mobile Responsive Speech Bubble */
+       @media (max-width: 768px) {
+           .hero-speech-bubble {
+               font-size: 0.85rem;
+               padding: 12px 18px;
+               top: 10%;
+               white-space: normal;
+               text-align: center;
+               max-width: 80%;
+               line-height: 1.4;
+           }
+           
+           .hero-speech-bubble::after {
+               bottom: -10px;
+               border-left: 10px solid transparent;
+               border-right: 10px solid transparent;
+               border-top: 10px solid var(--primary);
+           }
+       }
+
+       @media (max-width: 480px) {
+           .hero-speech-bubble {
+               font-size: 0.8rem;
+               padding: 10px 15px;
+               border-radius: 15px;
+           }
+       }
+
        /* Goal Section */
        .goal-section {
            padding: 100px 20px;
@@ -1563,6 +1657,9 @@
            font-size: 1.2rem;
            cursor: pointer;
            transition: all 0.3s ease;
+           display: flex;
+           align-items: center;
+           justify-content: center;
        }
 
        .modal-close:hover {
@@ -2544,6 +2641,16 @@
            </div>
            <div class="hero-image">
                <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=400&fit=crop" alt="Study in Japan from Bangladesh - JEJC">
+               
+               <!-- NEW: Speech Bubble in marked area (চিহ্নিত জায়গায় স্পিচ বাবল) -->
+               <div class="hero-speech-bubble" id="heroSpeechBubble">
+                   <button class="close-speech" onclick="closeSpeechBubble()">
+                       <i class="fas fa-times"></i>
+                   </button>
+                   <i class="fas fa-quote-left" style="color: var(--primary); margin-right: 5px;"></i>
+                   জাপানে পড়াশোনার স্বপ্ন এখনই বাস্তব করে তুলুন! 
+                   <i class="fas fa-quote-right" style="color: var(--primary); margin-left: 5px;"></i>
+               </div>
            </div>
        </div>
    </section>
@@ -3461,27 +3568,25 @@
                </div>
 
                <div class="contact-form reveal">
-                   <form id="contactForm" action="https://formspree.io/f/xwvnrkwv" method="POST">
-                       <input type="hidden" name="_subject" value="JEJC - নতুন যোগাযোগ বার্তা (Pillar Page)">
-                       <input type="hidden" name="_next" value="">
+                   <form id="contactForm">
                        <div class="success-message" id="contactSuccess">
                            <i class="fas fa-check-circle"></i> আপনার বার্তা পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।
                        </div>
                        <div class="form-group">
                            <label>আপনার নাম *</label>
-                           <input type="text" name="name" placeholder="পূর্ণ নাম লিখুন" required>
+                           <input type="text" name="name" id="contactName" placeholder="পূর্ণ নাম লিখুন" required>
                        </div>
                        <div class="form-group">
                            <label>মোবাইল নম্বর *</label>
-                           <input type="tel" name="phone" placeholder="০১৭xxxxxxxx" required>
+                           <input type="tel" name="phone" id="contactPhone" placeholder="০১৭xxxxxxxx" required>
                        </div>
                        <div class="form-group">
                            <label>ইমেইল</label>
-                           <input type="email" name="email" placeholder="example@email.com">
+                           <input type="email" name="email" id="contactEmail" placeholder="example@email.com">
                        </div>
                        <div class="form-group">
                            <label>বিষয় *</label>
-                           <select name="subject" required>
+                           <select name="subject" id="contactSubject" required>
                                <option value="">নির্বাচন করুন</option>
                                <option value="admission">ভর্তি সংক্রান্ত</option>
                                <option value="course">কোর্স তথ্য (JLPT)</option>
@@ -3493,7 +3598,7 @@
                        </div>
                        <div class="form-group">
                            <label>বার্তা</label>
-                           <textarea name="message" rows="4" placeholder="আপনার প্রশ্ন লিখুন..."></textarea>
+                           <textarea name="message" id="contactMessage" rows="4" placeholder="আপনার প্রশ্ন লিখুন..."></textarea>
                        </div>
                        <button type="submit" class="btn-submit" id="contactSubmitBtn">
                            <span class="spinner" id="contactSpinner"></span>
@@ -3570,12 +3675,10 @@
                <div class="success-message" id="admissionSuccess">
                    <i class="fas fa-check-circle"></i> আপনার আবেদন সফলভাবে জমা হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।
                </div>
-               <form id="admissionForm" action="https://formspree.io/f/xwvnrkwv" method="POST">
-                   <input type="hidden" name="_subject" value="JEJC - নতুন ভর্তি আবেদন (Pillar Page)">
-                   <input type="hidden" name="_next" value="">
+               <form id="admissionForm">
                    <div class="form-group">
                        <label>কোর্স নির্বাচন করুন *</label>
-                       <select name="course" required>
+                       <select name="course" id="admissionCourse" required>
                            <option value="">কোর্স নির্বাচন করুন</option>
                            <option value="n5">JLPT N5 (২০,০০০৳)</option>
                            <option value="n4">JLPT N4 (২০,০০০৳)</option>
@@ -3584,19 +3687,19 @@
                    </div>
                    <div class="form-group">
                        <label>আপনার নাম *</label>
-                       <input type="text" name="name" placeholder="পূর্ণ নাম লিখুন" required>
+                       <input type="text" name="name" id="admissionName" placeholder="পূর্ণ নাম লিখুন" required>
                    </div>
                    <div class="form-group">
                        <label>মোবাইল নম্বর *</label>
-                       <input type="tel" name="phone" placeholder="০১৭xxxxxxxx" required>
+                       <input type="tel" name="phone" id="admissionPhone" placeholder="০১৭xxxxxxxx" required>
                    </div>
                    <div class="form-group">
                        <label>ইমেইল</label>
-                       <input type="email" name="email" placeholder="example@email.com">
+                       <input type="email" name="email" id="admissionEmail" placeholder="example@email.com">
                    </div>
                    <div class="form-group">
                        <label>শিক্ষাগত যোগ্যতা *</label>
-                       <select name="education" required>
+                       <select name="education" id="admissionEducation" required>
                            <option value="">নির্বাচন করুন</option>
                            <option value="hsc">উচ্চ মাধ্যমিক (HSC)</option>
                            <option value="bachelor">স্নাতক (Bachelor)</option>
@@ -3606,7 +3709,7 @@
                    </div>
                    <div class="form-group">
                        <label>বর্তমান ঠিকানা</label>
-                       <textarea name="address" rows="3" placeholder="আপনার ঠিকানা লিখুন"></textarea>
+                       <textarea name="address" id="admissionAddress" rows="3" placeholder="আপনার ঠিকানা লিখুন"></textarea>
                    </div>
                    <button type="submit" class="btn-submit" id="admissionSubmitBtn">
                        <span class="spinner" id="admissionSpinner"></span>
@@ -3667,7 +3770,118 @@
    </div>
 
    <script>
-       // Gallery Data
+       // ==========================================
+       // TELEGRAM BOT CONFIGURATION
+       // ==========================================
+       
+       // ⚠️ IMPORTANT: Replace with your actual Chat ID
+       // How to get Chat ID:
+       // 1. Send a message to your bot: https://t.me/jejcbd_bot (or your bot link)
+       // 2. Visit: https://api.telegram.org/bot8740023162:AAE-8m45MO5bn3tvcWS1NrA4JPqDQ5LxavQ/getUpdates
+       // 3. Look for "chat":{"id":123456789 - that number is your Chat ID
+       const TELEGRAM_BOT_TOKEN = '8740023162:AAE-8m45MO5bn3tvcWS1NrA4JPqDQ5LxavQ';
+       const TELEGRAM_CHAT_ID = '5652231503'; // ⚠️ CHANGE THIS TO YOUR ACTUAL CHAT ID
+       
+       // ==========================================
+       // TELEGRAM BOT FUNCTIONS
+       // ==========================================
+       
+       // Function to send message to Telegram
+       async function sendToTelegram(message) {
+           if (TELEGRAM_CHAT_ID === 'YOUR_CHAT_ID_HERE') {
+               console.error('Please set your Telegram Chat ID first!');
+               alert('⚠️ দয়া করে Telegram Chat ID সেট করুন। কোডে TELEGRAM_CHAT_ID পরিবর্তন করুন।');
+               return false;
+           }
+           
+           const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+           const payload = {
+               chat_id: TELEGRAM_CHAT_ID,
+               text: message,
+               parse_mode: 'HTML'
+           };
+           
+           try {
+               const response = await fetch(url, {
+                   method: 'POST',
+                   headers: { 'Content-Type': 'application/json' },
+                   body: JSON.stringify(payload)
+               });
+               const data = await response.json();
+               return data.ok;
+           } catch (error) {
+               console.error('Telegram Error:', error);
+               return false;
+           }
+       }
+       
+       // Function to format Contact Form data for Telegram
+       function formatContactMessage(formData) {
+           const date = new Date().toLocaleString('bn-BD');
+           return `
+📝 <b>নতুন যোগাযোগ বার্তা (JEJC Website)</b>
+
+👤 <b>নাম:</b> ${formData.get('name')}
+📱 <b>মোবাইল:</b> ${formData.get('phone')}
+📧 <b>ইমেইল:</b> ${formData.get('email') || 'N/A'}
+📋 <b>বিষয়:</b> ${getSubjectInBangla(formData.get('subject'))}
+💬 <b>বার্তা:</b> ${formData.get('message') || 'N/A'}
+
+🕐 <b>সময়:</b> ${date}
+
+🔗 <b>উৎস:</b> Contact Form (JEJC Website)
+           `.trim();
+       }
+       
+       // Function to format Admission Form data for Telegram
+       function formatAdmissionMessage(formData) {
+           const date = new Date().toLocaleString('bn-BD');
+           const courseMap = {
+               'n5': 'JLPT N5 (২০,০০০৳)',
+               'n4': 'JLPT N4 (২০,০০০৳)',
+               'n3': 'JLPT N3 Preparation'
+           };
+           const eduMap = {
+               'hsc': 'উচ্চ মাধ্যমিক (HSC)',
+               'bachelor': 'স্নাতক (Bachelor)',
+               'masters': 'স্নাতকোত্তর (Masters)',
+               'other': 'অন্যান্য'
+           };
+           
+           return `
+🎓 <b>নতুন ভর্তি আবেদন (JEJC Website)</b>
+
+📚 <b>কোর্স:</b> ${courseMap[formData.get('course')] || formData.get('course')}
+👤 <b>নাম:</b> ${formData.get('name')}
+📱 <b>মোবাইল:</b> ${formData.get('phone')}
+📧 <b>ইমেইল:</b> ${formData.get('email') || 'N/A'}
+🎓 <b>শিক্ষাগত যোগ্যতা:</b> ${eduMap[formData.get('education')] || formData.get('education')}
+🏠 <b>ঠিকানা:</b> ${formData.get('address') || 'N/A'}
+
+🕐 <b>আবেদনের সময়:</b> ${date}
+
+🔗 <b>উৎস:</b> Admission Form (JEJC Website)
+⚡ <b>Action Required:</b> শীঘ্রই যোগাযোগ করুন!
+           `.trim();
+       }
+       
+       // Helper function to get subject in Bangla
+       function getSubjectInBangla(subject) {
+           const subjects = {
+               'admission': 'ভর্তি সংক্রান্ত',
+               'course': 'কোর্স তথ্য (JLPT)',
+               'visa': 'ভিসা তথ্য',
+               'cost': 'খরচ বিষয়ক',
+               'job': 'পার্ট-টাইম জব',
+               'other': 'অন্যান্য'
+           };
+           return subjects[subject] || subject;
+       }
+
+       // ==========================================
+       // GALLERY DATA & FUNCTIONS (Previous)
+       // ==========================================
+       
        const galleryImages = [
            { src: "https://i.postimg.cc/MTHYVdm4/1000183114-01.jpg", title: "সাফল্যমণ্ডিত শিক্ষার্থী", desc: "জাপানে গমনকারী শিক্ষার্থীদের সাথে" },
            { src: "https://i.postimg.cc/sD4wFQxm/1771994215945.jpg", title: "সাফল্যমণ্ডিত শিক্ষার্থী", desc: "জাপানে গমনকারী শিক্ষার্থীদের সাথে" },
@@ -3803,7 +4017,6 @@
            if (e.target.id === 'lightbox') closeLightbox();
        });
 
-       // [PREVIOUS JAVASCRIPT REMAINS EXACTLY THE SAME]
        // Mobile Menu Toggle
        const mobileToggle = document.getElementById('mobileToggle');
        const mobileMenu = document.getElementById('mobileMenu');
@@ -3868,6 +4081,29 @@
            }
        });
 
+       // ==========================================
+       // NEW: Speech Bubble Close Function
+       // ==========================================
+       function closeSpeechBubble() {
+           const speechBubble = document.getElementById('heroSpeechBubble');
+           if (speechBubble) {
+               speechBubble.style.opacity = '0';
+               speechBubble.style.transform = 'translateX(-50%) translateY(-20px)';
+               setTimeout(() => {
+                   speechBubble.style.display = 'none';
+               }, 300);
+           }
+       }
+
+       // Auto hide speech bubble after 10 seconds
+       setTimeout(() => {
+           closeSpeechBubble();
+       }, 10000);
+
+       // ==========================================
+       // UPDATED FORM HANDLERS WITH TELEGRAM INTEGRATION
+       // ==========================================
+
        // Handle Contact Form Submission
        const contactForm = document.getElementById('contactForm');
        const contactSubmitBtn = document.getElementById('contactSubmitBtn');
@@ -3875,7 +4111,7 @@
        const contactIcon = document.getElementById('contactIcon');
        const contactSuccess = document.getElementById('contactSuccess');
 
-       contactForm.addEventListener('submit', function(e) {
+       contactForm.addEventListener('submit', async function(e) {
            e.preventDefault();
            
            contactSubmitBtn.disabled = true;
@@ -3884,29 +4120,23 @@
            
            const formData = new FormData(contactForm);
            
-           fetch(contactForm.action, {
-               method: 'POST',
-               body: formData,
-               headers: {
-                   'Accept': 'application/json'
-               }
-           }).then(response => {
-               if (response.ok) {
-                   contactSuccess.classList.add('show');
-                   contactForm.reset();
-                   setTimeout(() => {
-                       contactSuccess.classList.remove('show');
-                   }, 5000);
-               } else {
-                   alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-               }
-           }).catch(error => {
-               alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-           }).finally(() => {
-               contactSubmitBtn.disabled = false;
-               contactSpinner.classList.remove('show');
-               contactIcon.style.display = 'inline-block';
-           });
+           // Send to Telegram
+           const telegramMessage = formatContactMessage(formData);
+           const telegramSent = await sendToTelegram(telegramMessage);
+           
+           if (telegramSent) {
+               contactSuccess.classList.add('show');
+               contactForm.reset();
+               setTimeout(() => {
+                   contactSuccess.classList.remove('show');
+               }, 5000);
+           } else {
+               alert('দুঃখিত, বার্তা পাঠাতে সমস্যা হয়েছে। অনুগ্রহ করে সরাসরি ফোন করুন: +880 1712-345678');
+           }
+           
+           contactSubmitBtn.disabled = false;
+           contactSpinner.classList.remove('show');
+           contactIcon.style.display = 'inline-block';
        });
 
        // Handle Admission Form Submission
@@ -3916,7 +4146,7 @@
        const admissionIcon = document.getElementById('admissionIcon');
        const admissionSuccess = document.getElementById('admissionSuccess');
 
-       admissionForm.addEventListener('submit', function(e) {
+       admissionForm.addEventListener('submit', async function(e) {
            e.preventDefault();
            
            admissionSubmitBtn.disabled = true;
@@ -3925,30 +4155,24 @@
            
            const formData = new FormData(admissionForm);
            
-           fetch(admissionForm.action, {
-               method: 'POST',
-               body: formData,
-               headers: {
-                   'Accept': 'application/json'
-               }
-           }).then(response => {
-               if (response.ok) {
-                   admissionSuccess.classList.add('show');
-                   admissionForm.reset();
-                   setTimeout(() => {
-                       closeModal();
-                       admissionSuccess.classList.remove('show');
-                   }, 3000);
-               } else {
-                   alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-               }
-           }).catch(error => {
-               alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-           }).finally(() => {
-               admissionSubmitBtn.disabled = false;
-               admissionSpinner.classList.remove('show');
-               admissionIcon.style.display = 'inline-block';
-           });
+           // Send to Telegram
+           const telegramMessage = formatAdmissionMessage(formData);
+           const telegramSent = await sendToTelegram(telegramMessage);
+           
+           if (telegramSent) {
+               admissionSuccess.classList.add('show');
+               admissionForm.reset();
+               setTimeout(() => {
+                   closeModal();
+                   admissionSuccess.classList.remove('show');
+               }, 3000);
+           } else {
+               alert('দুঃখিত, আবেদন জমা দিতে সমস্যা হয়েছে। অনুগ্রহ করে সরাসরি ফোন করুন: +880 1712-345678');
+           }
+           
+           admissionSubmitBtn.disabled = false;
+           admissionSpinner.classList.remove('show');
+           admissionIcon.style.display = 'inline-block';
        });
 
        // Smooth Scroll
@@ -4135,4 +4359,4 @@
        });
    </script>
 </body>
-      </html>
+   </html>
