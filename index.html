@@ -1900,10 +1900,10 @@
            border-radius: var(--radius-sm);
        }
 
-       /* Gallery Section */
+       /* Gallery Section - Enhanced */
        .gallery-section {
            padding: var(--space-24) 0;
-           background: var(--bg-secondary);
+           background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
        }
 
        .gallery-filter-container {
@@ -1912,18 +1912,20 @@
            gap: var(--space-3);
            margin-bottom: var(--space-12);
            flex-wrap: wrap;
+           padding: 0 var(--space-4);
        }
 
        .gallery-filter {
            padding: var(--space-3) var(--space-6);
            background: white;
-           border: 1px solid var(--neutral-200);
+           border: 2px solid var(--neutral-200);
            border-radius: var(--radius-full);
            font-size: var(--text-sm);
            font-weight: 600;
            color: var(--neutral-600);
            cursor: pointer;
            transition: all var(--transition-base);
+           font-family: 'Noto Sans Bengali', sans-serif;
        }
 
        .gallery-filter:hover,
@@ -1931,11 +1933,13 @@
            background: var(--primary);
            color: white;
            border-color: var(--primary);
-           box-shadow: 0 4px 12px rgba(230, 0, 18, 0.2);
+           box-shadow: 0 4px 12px rgba(230, 0, 18, 0.25);
+           transform: translateY(-2px);
        }
 
        .gallery-category {
            margin-bottom: var(--space-16);
+           transition: opacity 0.3s ease, transform 0.3s ease;
        }
 
        .gallery-category-title {
@@ -1945,11 +1949,13 @@
            align-items: center;
            gap: var(--space-3);
            padding-bottom: var(--space-4);
-           border-bottom: 2px solid var(--neutral-200);
+           border-bottom: 3px solid var(--neutral-200);
+           color: var(--neutral-800);
        }
 
        .gallery-category-title i {
            color: var(--primary);
+           font-size: var(--text-xl);
        }
 
        .gallery-grid {
@@ -1966,11 +1972,12 @@
            cursor: pointer;
            box-shadow: var(--shadow-sm);
            transition: all var(--transition-base);
+           background: var(--neutral-100);
        }
 
        .gallery-item:hover {
-           transform: translateY(-4px);
-           box-shadow: var(--shadow-xl);
+           transform: translateY(-8px) scale(1.02);
+           box-shadow: var(--shadow-2xl);
        }
 
        .gallery-item img {
@@ -1987,7 +1994,7 @@
        .gallery-overlay {
            position: absolute;
            inset: 0;
-           background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+           background: linear-gradient(to top, rgba(230,0,18,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
            display: flex;
            flex-direction: column;
            justify-content: flex-end;
@@ -2004,20 +2011,29 @@
            color: white;
            font-size: var(--text-lg);
            margin-bottom: var(--space-1);
+           transform: translateY(20px);
+           transition: transform var(--transition-base);
        }
 
        .gallery-overlay p {
-           color: rgba(255,255,255,0.8);
+           color: rgba(255,255,255,0.9);
            font-size: var(--text-sm);
+           transform: translateY(20px);
+           transition: transform var(--transition-base) 0.1s;
        }
 
-       /* Lightbox */
+       .gallery-item:hover .gallery-overlay h4,
+       .gallery-item:hover .gallery-overlay p {
+           transform: translateY(0);
+       }
+
+       /* Lightbox - Enhanced */
        .lightbox {
            display: none;
            position: fixed;
            inset: 0;
            background: rgba(0,0,0,0.95);
-           backdrop-filter: blur(10px);
+           backdrop-filter: blur(20px);
            z-index: 10000;
            justify-content: center;
            align-items: center;
@@ -2037,22 +2053,26 @@
            position: relative;
            max-width: 90vw;
            max-height: 90vh;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
        }
 
        .lightbox-img {
            max-width: 100%;
            max-height: 85vh;
-           border-radius: var(--radius-xl);
-           box-shadow: var(--shadow-2xl);
+           border-radius: var(--radius-2xl);
+           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+           transition: opacity 0.2s ease;
        }
 
        .lightbox-close {
            position: absolute;
-           top: -50px;
+           top: -60px;
            right: 0;
-           width: 48px;
-           height: 48px;
-           background: rgba(255,255,255,0.1);
+           width: 50px;
+           height: 50px;
+           background: rgba(255,255,255,0.15);
            border-radius: var(--radius-full);
            color: white;
            font-size: var(--text-xl);
@@ -2060,47 +2080,55 @@
            align-items: center;
            justify-content: center;
            transition: all var(--transition-base);
+           z-index: 10001;
+           border: 2px solid rgba(255,255,255,0.2);
        }
 
        .lightbox-close:hover {
            background: var(--primary);
-           transform: rotate(90deg);
+           border-color: var(--primary);
+           transform: rotate(90deg) scale(1.1);
        }
 
        .lightbox-nav {
            position: absolute;
            top: 50%;
            transform: translateY(-50%);
-           width: 56px;
-           height: 56px;
-           background: rgba(255,255,255,0.1);
+           width: 60px;
+           height: 60px;
+           background: rgba(255,255,255,0.15);
            border-radius: var(--radius-full);
            color: white;
-           font-size: var(--text-xl);
+           font-size: var(--text-2xl);
            display: flex;
            align-items: center;
            justify-content: center;
            transition: all var(--transition-base);
            backdrop-filter: blur(10px);
+           border: 2px solid rgba(255,255,255,0.2);
+           z-index: 10001;
        }
 
        .lightbox-nav:hover {
            background: var(--primary);
-           transform: translateY(-50%) scale(1.1);
+           border-color: var(--primary);
+           transform: translateY(-50%) scale(1.15);
        }
 
-       .lightbox-prev { left: -80px; }
-       .lightbox-next { right: -80px; }
+       .lightbox-prev { left: var(--space-8); }
+       .lightbox-next { right: var(--space-8); }
 
        .lightbox-caption {
            position: absolute;
-           bottom: -60px;
+           bottom: -80px;
            left: 0;
            right: 0;
            text-align: center;
            color: white;
-           font-size: var(--text-lg);
-           font-weight: 500;
+           font-size: var(--text-xl);
+           font-weight: 600;
+           text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+           padding: var(--space-4);
        }
 
        /* Services Section */
@@ -3459,6 +3487,13 @@
            .dashboard-panel {
                width: 100%;
            }
+
+           .gallery-grid {
+               grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+           }
+
+           .lightbox-prev { left: var(--space-4); }
+           .lightbox-next { right: var(--space-4); }
        }
 
        @media (max-width: 768px) {
@@ -3584,6 +3619,30 @@
            .stats-grid-mini {
                grid-template-columns: repeat(3, 1fr);
            }
+
+           /* Gallery Mobile */
+           .gallery-grid {
+               grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+               gap: var(--space-3);
+           }
+
+           .gallery-filter-container {
+               gap: var(--space-2);
+           }
+
+           .gallery-filter {
+               padding: var(--space-2) var(--space-3);
+               font-size: var(--text-xs);
+           }
+
+           .gallery-category-title {
+               font-size: var(--text-xl);
+           }
+
+           .lightbox-caption {
+               font-size: var(--text-base);
+               bottom: -60px;
+           }
        }
 
        @media (max-width: 480px) {
@@ -3611,7 +3670,7 @@
            }
 
            .gallery-grid {
-               grid-template-columns: 1fr;
+               grid-template-columns: 1fr 1fr;
            }
 
            .login-btn span {
@@ -3644,6 +3703,12 @@
 
            .stat-card-mini {
                padding: var(--space-3);
+           }
+
+           .lightbox-nav {
+               width: 40px;
+               height: 40px;
+               font-size: var(--text-lg);
            }
        }
 
@@ -3724,6 +3789,7 @@
                        <li><a href="#home" class="active" itemprop="url"><span itemprop="name">হোম</span></a></li>
                        <li><a href="#guide" itemprop="url"><span itemprop="name">গাইড</span></a></li>
                        <li><a href="#chairman" itemprop="url"><span itemprop="name">চেয়ারম্যান</span></a></li>
+                       <li><a href="#gallery" itemprop="url"><span itemprop="name">গ্যালারি</span></a></li>
                        <li><a href="#services" itemprop="url"><span itemprop="name">সেবা</span></a></li>
                        <li><a href="#courses" itemprop="url"><span itemprop="name">কোর্স</span></a></li>
                        <li><a href="#contact" itemprop="url"><span itemprop="name">যোগাযোগ</span></a></li>
@@ -3797,6 +3863,9 @@
            </a>
            <a href="#chairman" onclick="closeMobileMenu()">
                <i class="fas fa-user-tie"></i> চেয়ারম্যান
+           </a>
+           <a href="#gallery" onclick="closeMobileMenu()">
+               <i class="fas fa-images"></i> গ্যালারি
            </a>
            <a href="#services" onclick="closeMobileMenu()">
                <i class="fas fa-cogs"></i> সেবাসমূহ
@@ -4293,7 +4362,7 @@
 
                <div class="guide-card reveal">
                    <h4><i class="fas fa-briefcase"></i> পার্ট-টাইম জব (২৮ ঘণ্টা)</h4>
-                   <p>স্টুডেন্ট ভিসায় আপনি সপ্তাহে <strong>২৮ ঘণ্টা</strong> কাজ করতে পারবেন। <strong>Part-time job in Japan for students</strong> এর গড় বেতন ঘণ্টায় ১,০০০-১,২০০ ইয়েন। মাসে ১-১.৫ লাখ ইয়েন আয় সম্ভব। কনভিনিয়েন্স স্টোর, রেস্তোরাঁ, এবং ফ্যাক্টরিতে সহজেই কাজ পাওয়া যায়। এটি আপনার লিভিং কস্ট এবং টিউশন ফি অনায়াসে মিটিয়ে দেবে।</p>
+                   <p>স্টুডেন্ট ভিসায় আপনি সপ্তাহে <strong>২৮ ঘণ্টা</strong> পার্ট-টাইম কাজের অনুমতি রয়েছে। <strong>Part-time job in Japan for students</strong> এর গড় বেতন ঘণ্টায় ১,০০০-১,২০০ ইয়েন। মাসে ১-১.৫ লাখ ইয়েন আয় সম্ভব। কনভিনিয়েন্স স্টোর, রেস্তোরাঁ, এবং ফ্যাক্টরিতে সহজেই কাজ পাওয়া যায়। এটি আপনার লিভিং কস্ট এবং টিউশন ফি অনায়াসে মিটিয়ে দেবে।</p>
                    <a href="part-time-job-in-japan.html">কাজের বিস্তারিত <i class="fas fa-arrow-right"></i></a>
                </div>
 
@@ -4329,6 +4398,289 @@
            </div>
        </div>
    </section>
+
+   <!-- Gallery Section - Added -->
+   <section class="gallery-section" id="gallery">
+       <div class="container">
+           <div class="section-header reveal">
+               <span class="section-tag">গ্যালারি</span>
+               <h2 class="section-title">আমাদের কার্যক্রম ও সফলতা</h2>
+               <p class="section-subtitle">JEJC এর বিভিন্ন কার্যক্রম, শিক্ষার্থীদের সাফল্য এবং ক্যাম্পাস জীবনের সুন্দর মুহূর্তগুলো</p>
+           </div>
+
+           <div class="gallery-filter-container reveal">
+               <button class="gallery-filter active" onclick="filterGallery('all')">সব ছবি</button>
+               <button class="gallery-filter" onclick="filterGallery('students')">সাফল্যমণ্ডিত শিক্ষার্থী</button>
+               <button class="gallery-filter" onclick="filterGallery('class')">ভাষা ক্লাস</button>
+               <button class="gallery-filter" onclick="filterGallery('certificate')">সার্টিফিকেট প্রদান</button>
+               <button class="gallery-filter" onclick="filterGallery('counseling')">ক্যারিয়ার কাউন্সেলিং</button>
+               <button class="gallery-filter" onclick="filterGallery('cultural')">সাংস্কৃতিক অনুষ্ঠান</button>
+               <button class="gallery-filter" onclick="filterGallery('office')">অফিস পরিবেশ</button>
+           </div>
+
+           <!-- সাফল্যমণ্ডিত শিক্ষার্থী -->
+           <div class="gallery-category reveal" data-category="students">
+               <h3 class="gallery-category-title"><i class="fas fa-user-graduate"></i> সাফল্যমণ্ডিত শিক্ষার্থী - জাপানে গমনকারী শিক্ষার্থীদের সাথে</h3>
+               <div class="gallery-grid">
+                   <div class="gallery-item" onclick="openLightbox(0)">
+                       <img src="https://i.postimg.cc/MTHYVdm4/1000183114-01.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ১" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>জাপান প্রস্তুতি</h4>
+                           <p>ভিসা পাওয়ার পর শিক্ষার্থীরা</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(1)">
+                       <img src="https://i.postimg.cc/sD4wFQxm/1771994215945.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ২" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>সফল শিক্ষার্থী</h4>
+                           <p>জাপান যাত্রার পূর্ব মুহূর্ত</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(2)">
+                       <img src="https://i.postimg.cc/qRKx1gW9/1771994920772.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ৩" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>নতুন যাত্রা</h4>
+                           <p>স্বপ্ন পূরণের পথে</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(3)">
+                       <img src="https://i.postimg.cc/CxdDvzqR/1771807649023.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ৪" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>প্রস্তুতি সম্পন্ন</h4>
+                           <p>জাপানের জন্য প্রস্তুত</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(4)">
+                       <img src="https://i.postimg.cc/B6JnVVVg/1772008988449.jpg" alt="সাফল্যমণ্ডিত শিক্ষার্থী ৫" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>অনুষ্ঠানে শিক্ষার্থীরা</h4>
+                           <p>বিদায় অনুষ্ঠান</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <!-- ভাষা ক্লাস -->
+           <div class="gallery-category reveal" data-category="class">
+               <h3 class="gallery-category-title"><i class="fas fa-chalkboard-teacher"></i> ভাষা ক্লাস - জাপানি ভাষা শিক্ষার ক্লাস চলাকালীন</h3>
+               <div class="gallery-grid">
+                   <div class="gallery-item" onclick="openLightbox(5)">
+                       <img src="https://i.postimg.cc/BnYW0wt6/1771994258113.jpg" alt="ভাষা ক্লাস ১" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>ক্লাসরুম</h4>
+                           <p>সক্রিয় শিক্ষা কার্যক্রম</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(6)">
+                       <img src="https://i.postimg.cc/ZnZs3r06/1771994266481.jpg" alt="ভাষা ক্লাস ২" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>গ্রুপ স্টাডি</h4>
+                           <p>সহপাঠীদের সাথে অধ্যয়ন</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(7)">
+                       <img src="https://i.postimg.cc/L8ffdGxP/1772009007833.jpg" alt="ভাষা ক্লাস ৩" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>প্রাকটিস সেশন</h4>
+                           <p>ভাষা দক্ষতা উন্নয়ন</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(8)">
+                       <img src="https://i.postimg.cc/Hs885fDR/1772009011937.jpg" alt="ভাষা ক্লাস ৪" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>ইন্টারঅ্যাক্টিভ ক্লাস</h4>
+                           <p>শিক্ষক-শিক্ষার্থী মিলনমেলা</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(9)">
+                       <img src="https://i.postimg.cc/k5s2qCK2/1772009015846.jpg" alt="ভাষা ক্লাস ৫" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>ল্যাঙ্গুয়েজ ল্যাব</h4>
+                           <p>আধুনিক শিক্ষা পরিবেশ</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(10)">
+                       <img src="https://i.postimg.cc/qBSzkjhz/1772009026764.jpg" alt="ভাষা ক্লাস ৬" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>ক্লাস অ্যাক্টিভিটি</h4>
+                           <p>সৃজনশীল শিক্ষাপদ্ধতি</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <!-- সার্টিফিকেট প্রদান -->
+           <div class="gallery-category reveal" data-category="certificate">
+               <h3 class="gallery-category-title"><i class="fas fa-certificate"></i> সার্টিফিকেট প্রদান অনুষ্ঠান</h3>
+               <div class="gallery-grid">
+                   <div class="gallery-item" onclick="openLightbox(11)">
+                       <img src="https://i.postimg.cc/FF37H0jB/1771994802176.jpg" alt="সার্টিফিকেট প্রদান ১" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>সার্টিফিকেট বিতরণ</h4>
+                           <p>কোর্স সম্পন্নকারীদের সংবর্ধনা</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(12)">
+                       <img src="https://i.postimg.cc/gjWcZBV9/1771994806403.jpg" alt="সার্টিফিকেট প্রদান ২" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>সফল সমাপনী</h4>
+                           <p>শিক্ষার্থীদের হাতে সার্টিফিকেট</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(13)">
+                       <img src="https://i.postimg.cc/htfnfqHY/1771994441848.jpg" alt="সার্টিফিকেট প্রদান ৩" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>অনুষ্ঠানে অতিথিবৃন্দ</h4>
+                           <p>সম্মাননা প্রদান</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(14)">
+                       <img src="https://i.postimg.cc/j5rYgnLy/1771994430307.jpg" alt="সার্টিফিকেট প্রদান ৪" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>গর্বিত মুহূর্ত</h4>
+                           <p>সাফল্য উদযাপন</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <!-- ক্যারিয়ার কাউন্সেলিং -->
+           <div class="gallery-category reveal" data-category="counseling">
+               <h3 class="gallery-category-title"><i class="fas fa-user-tie"></i> ক্যারিয়ার কাউন্সেলিং - বিশেষজ্ঞ পরামর্শকদের মাধ্যমে গাইডলাইন</h3>
+               <div class="gallery-grid">
+                   <div class="gallery-item" onclick="openLightbox(15)">
+                       <img src="https://i.postimg.cc/d19p5HMK/1771994380985.jpg" alt="ক্যারিয়ার কাউন্সেলিং ১" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>ওয়ান-টু-ওয়ান কাউন্সেলিং</h4>
+                           <p>ব্যক্তিগত পরামর্শ সেবা</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(16)">
+                       <img src="https://i.postimg.cc/9fmGGJYv/1772009740532.jpg" alt="ক্যারিয়ার কাউন্সেলিং ২" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>সেমিনার</h4>
+                           <p>ক্যারিয়ার গাইডলাইন সেশন</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(17)">
+                       <img src="https://i.postimg.cc/y6kP3vVc/1772009761248.jpg" alt="ক্যারিয়ার কাউন্সেলিং ৩" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>গ্রুপ কাউন্সেলিং</h4>
+                           <p>সামষ্টিক পরামর্শ সভা</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(18)">
+                       <img src="https://i.postimg.cc/vm0rc6Cb/1772009770672.jpg" alt="ক্যারিয়ার কাউন্সেলিং ৪" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>বিশেষজ্ঞ পরামর্শ</h4>
+                           <p>অভিজ্ঞ পরামর্শকদের সাথে</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <!-- সাংস্কৃতিক অনুষ্ঠান -->
+           <div class="gallery-category reveal" data-category="cultural">
+               <h3 class="gallery-category-title"><i class="fas fa-theater-masks"></i> সাংস্কৃতিক অনুষ্ঠান - জাপানি সংস্কৃতি পরিচিতি</h3>
+               <div class="gallery-grid">
+                   <div class="gallery-item" onclick="openLightbox(19)">
+                       <img src="https://i.postimg.cc/FKzfCCnv/1771994397442.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ১" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>সাংস্কৃতিক আয়োজন</h4>
+                           <p>জাপানি সংস্কৃতির পরিচয়</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(20)">
+                       <img src="https://i.postimg.cc/90YFQyND/1771994394830.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ২" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>কালচারাল ডে</h4>
+                           <p>আনন্দঘন পরিবেশ</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(21)">
+                       <img src="https://i.postimg.cc/CKnhf3QZ/1771994387885.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ৩" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>ঐতিহ্যবাহী অনুষ্ঠান</h4>
+                           <p>সাংস্কৃতিক বিনিময়</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(22)">
+                       <img src="https://i.postimg.cc/FKzfCCnv/1771994397442.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ৪" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>অনুষ্ঠানে অতিথি</h4>
+                           <p>সাংস্কৃতিক পরিচিতি সেশন</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(23)">
+                       <img src="https://i.postimg.cc/9fmGGJYv/1772009740532.jpg" alt="সাংস্কৃতিক অনুষ্ঠান ৫" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>সম্মিলন অনুষ্ঠান</h4>
+                           <p>শিক্ষার্থীদের অংশগ্রহণ</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <!-- অফিস পরিবেশ -->
+           <div class="gallery-category reveal" data-category="office">
+               <h3 class="gallery-category-title"><i class="fas fa-building"></i> অফিস পরিবেশ - JEJC এর আধুনিক অফিস সুবিধা</h3>
+               <div class="gallery-grid">
+                   <div class="gallery-item" onclick="openLightbox(24)">
+                       <img src="https://i.postimg.cc/h4zYRS7X/1772010108639.jpg" alt="অফিস পরিবেশ ১" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>রিসেপশন এলাকা</h4>
+                           <p>আধুনিক অভ্যর্থনা</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(25)">
+                       <img src="https://i.postimg.cc/JhzT6mWf/1772010126279.jpg" alt="অফিস পরিবেশ ২" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>কাউন্সেলিং রুম</h4>
+                           <p>পরামর্শ কক্ষ</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(26)">
+                       <img src="https://i.postimg.cc/8k6Zntqp/1772010102857.jpg" alt="অফিস পরিবেশ ৩" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>ক্লাসরুম</h4>
+                           <p>শিক্ষণীয় পরিবেশ</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(27)">
+                       <img src="https://i.postimg.cc/t4XDJy7z/1772010095695.jpg" alt="অফিস পরিবেশ ৪" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>অফিস স্পেস</h4>
+                           <p>কর্মচারীদের কার্যক্ষেত্র</p>
+                       </div>
+                   </div>
+                   <div class="gallery-item" onclick="openLightbox(28)">
+                       <img src="https://i.postimg.cc/J0Nc7dLQ/1772010098772.jpg" alt="অফিস পরিবেশ ৫" loading="lazy">
+                       <div class="gallery-overlay">
+                           <h4>সুবিধাজনক পরিবেশ</h4>
+                           <p>আধুনিক সুযোগ-সুবিধা</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- Lightbox -->
+   <div class="lightbox" id="lightbox" onclick="closeLightboxOnBackground(event)">
+       <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close lightbox">
+           <i class="fas fa-times"></i>
+       </button>
+       <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1); event.stopPropagation();" aria-label="Previous image">
+           <i class="fas fa-chevron-left"></i>
+       </button>
+       <div class="lightbox-content" onclick="event.stopPropagation();">
+           <img src="" alt="" class="lightbox-img" id="lightboxImg">
+           <div class="lightbox-caption" id="lightboxCaption"></div>
+       </div>
+       <button class="lightbox-nav lightbox-next" onclick="changeImage(1); event.stopPropagation();" aria-label="Next image">
+           <i class="fas fa-chevron-right"></i>
+       </button>
+   </div>
 
    <!-- Services Section -->
    <section class="services-section" id="services" itemscope itemtype="https://schema.org/Service">
@@ -4792,8 +5144,8 @@
                        <li><a href="#guide"><i class="fas fa-chevron-right"></i> সম্পূর্ণ গাইড</a></li>
                        <li><a href="#goal"><i class="fas fa-chevron-right"></i> আমাদের লক্ষ্য</a></li>
                        <li><a href="#chairman"><i class="fas fa-chevron-right"></i> চেয়ারম্যান</a></li>
+                       <li><a href="#gallery"><i class="fas fa-chevron-right"></i> গ্যালারি</a></li>
                        <li><a href="#services"><i class="fas fa-chevron-right"></i> সেবাসমূহ</a></li>
-                       <li><a href="#courses"><i class="fas fa-chevron-right"></i> কোর্স</a></li>
                    </ul>
                </div>
                <div class="footer-column">
@@ -5332,6 +5684,122 @@
            return subjects[subject] || subject;
        }
 
+       // Gallery Filter Functionality
+       function filterGallery(category) {
+           // Update buttons
+           document.querySelectorAll('.gallery-filter').forEach(btn => {
+               btn.classList.remove('active');
+           });
+           event.target.classList.add('active');
+           
+           // Filter categories with animation
+           const categories = document.querySelectorAll('.gallery-category');
+           categories.forEach(cat => {
+               if (category === 'all' || cat.dataset.category === category) {
+                   cat.style.display = 'block';
+                   setTimeout(() => {
+                       cat.style.opacity = '1';
+                       cat.style.transform = 'translateY(0)';
+                   }, 10);
+               } else {
+                   cat.style.opacity = '0';
+                   cat.style.transform = 'translateY(20px)';
+                   setTimeout(() => {
+                       cat.style.display = 'none';
+                   }, 300);
+               }
+           });
+       }
+
+       // Lightbox Functionality
+       let currentImageIndex = 0;
+       const galleryImages = [
+           { src: 'https://i.postimg.cc/MTHYVdm4/1000183114-01.jpg', caption: 'সাফল্যমণ্ডিত শিক্ষার্থী - জাপান যাত্রার প্রস্তুতি' },
+           { src: 'https://i.postimg.cc/sD4wFQxm/1771994215945.jpg', caption: 'সফল শিক্ষার্থী - জাপানে গমনকারী' },
+           { src: 'https://i.postimg.cc/qRKx1gW9/1771994920772.jpg', caption: 'নতুন যাত্রা - স্বপ্ন পূরণের পথে' },
+           { src: 'https://i.postimg.cc/CxdDvzqR/1771807649023.jpg', caption: 'প্রস্তুতি সম্পন্ন - জাপানের জন্য প্রস্তুত' },
+           { src: 'https://i.postimg.cc/B6JnVVVg/1772008988449.jpg', caption: 'বিদায় অনুষ্ঠান - শুভকামনা' },
+           { src: 'https://i.postimg.cc/BnYW0wt6/1771994258113.jpg', caption: 'ভাষা ক্লাস - সক্রিয় শিক্ষা কার্যক্রম' },
+           { src: 'https://i.postimg.cc/ZnZs3r06/1771994266481.jpg', caption: 'গ্রুপ স্টাডি - সহপাঠীদের সাথে অধ্যয়ন' },
+           { src: 'https://i.postimg.cc/L8ffdGxP/1772009007833.jpg', caption: 'প্রাকটিস সেশন - ভাষা দক্ষতা উন্নয়ন' },
+           { src: 'https://i.postimg.cc/Hs885fDR/1772009011937.jpg', caption: 'ইন্টারঅ্যাক্টিভ ক্লাস' },
+           { src: 'https://i.postimg.cc/k5s2qCK2/1772009015846.jpg', caption: 'ল্যাঙ্গুয়েজ ল্যাব - আধুনিক শিক্ষা' },
+           { src: 'https://i.postimg.cc/qBSzkjhz/1772009026764.jpg', caption: 'ক্লাস অ্যাক্টিভিটি' },
+           { src: 'https://i.postimg.cc/FF37H0jB/1771994802176.jpg', caption: 'সার্টিফিকেট প্রদান অনুষ্ঠান' },
+           { src: 'https://i.postimg.cc/gjWcZBV9/1771994806403.jpg', caption: 'সফল সমাপনী' },
+           { src: 'https://i.postimg.cc/htfnfqHY/1771994441848.jpg', caption: 'অনুষ্ঠানে অতিথিবৃন্দ' },
+           { src: 'https://i.postimg.cc/j5rYgnLy/1771994430307.jpg', caption: 'গর্বিত মুহূর্ত - সাফল্য উদযাপন' },
+           { src: 'https://i.postimg.cc/d19p5HMK/1771994380985.jpg', caption: 'ওয়ান-টু-ওয়ান কাউন্সেলিং' },
+           { src: 'https://i.postimg.cc/9fmGGJYv/1772009740532.jpg', caption: 'ক্যারিয়ার গাইডলাইন সেমিনার' },
+           { src: 'https://i.postimg.cc/y6kP3vVc/1772009761248.jpg', caption: 'গ্রুপ কাউন্সেলিং সেশন' },
+           { src: 'https://i.postimg.cc/vm0rc6Cb/1772009770672.jpg', caption: 'বিশেষজ্ঞ পরামর্শ' },
+           { src: 'https://i.postimg.cc/FKzfCCnv/1771994397442.jpg', caption: 'সাংস্কৃতিক অনুষ্ঠান' },
+           { src: 'https://i.postimg.cc/90YFQyND/1771994394830.jpg', caption: 'কালচারাল ডে' },
+           { src: 'https://i.postimg.cc/CKnhf3QZ/1771994387885.jpg', caption: 'ঐতিহ্যবাহী অনুষ্ঠান' },
+           { src: 'https://i.postimg.cc/FKzfCCnv/1771994397442.jpg', caption: 'সাংস্কৃতিক পরিচিতি সেশন' },
+           { src: 'https://i.postimg.cc/9fmGGJYv/1772009740532.jpg', caption: 'সম্মিলন অনুষ্ঠান' },
+           { src: 'https://i.postimg.cc/h4zYRS7X/1772010108639.jpg', caption: 'আধুনিক রিসেপশন এলাকা' },
+           { src: 'https://i.postimg.cc/JhzT6mWf/1772010126279.jpg', caption: 'কাউন্সেলিং রুম' },
+           { src: 'https://i.postimg.cc/8k6Zntqp/1772010102857.jpg', caption: 'আধুনিক ক্লাসরুম' },
+           { src: 'https://i.postimg.cc/t4XDJy7z/1772010095695.jpg', caption: 'অফিস স্পেস' },
+           { src: 'https://i.postimg.cc/J0Nc7dLQ/1772010098772.jpg', caption: 'সুবিধাজনক পরিবেশ' }
+       ];
+
+       function openLightbox(index) {
+           currentImageIndex = index;
+           const lightbox = document.getElementById('lightbox');
+           const img = document.getElementById('lightboxImg');
+           const caption = document.getElementById('lightboxCaption');
+           
+           img.src = galleryImages[index].src;
+           caption.textContent = galleryImages[index].caption;
+           lightbox.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       }
+
+       function closeLightbox() {
+           const lightbox = document.getElementById('lightbox');
+           lightbox.classList.remove('active');
+           document.body.style.overflow = '';
+       }
+
+       function closeLightboxOnBackground(event) {
+           if (event.target === event.currentTarget) {
+               closeLightbox();
+           }
+       }
+
+       function changeImage(direction) {
+           currentImageIndex += direction;
+           
+           if (currentImageIndex < 0) {
+               currentImageIndex = galleryImages.length - 1;
+           } else if (currentImageIndex >= galleryImages.length) {
+               currentImageIndex = 0;
+           }
+           
+           const img = document.getElementById('lightboxImg');
+           const caption = document.getElementById('lightboxCaption');
+           
+           // Add fade effect
+           img.style.opacity = '0';
+           setTimeout(() => {
+               img.src = galleryImages[currentImageIndex].src;
+               caption.textContent = galleryImages[currentImageIndex].caption;
+               img.style.opacity = '1';
+           }, 200);
+       }
+
+       // Keyboard navigation for lightbox
+       document.addEventListener('keydown', (e) => {
+           const lightbox = document.getElementById('lightbox');
+           if (lightbox && lightbox.classList.contains('active')) {
+               if (e.key === 'Escape') closeLightbox();
+               if (e.key === 'ArrowLeft') changeImage(-1);
+               if (e.key === 'ArrowRight') changeImage(1);
+           }
+       });
+
        // Mobile Menu
        const mobileToggle = document.getElementById('mobileToggle');
        const mobileMenu = document.getElementById('mobileMenu');
@@ -5730,4 +6198,4 @@
        }, { passive: false });
    </script>
 </body>
-   </html>
+      </html>
